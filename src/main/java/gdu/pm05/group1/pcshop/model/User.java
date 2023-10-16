@@ -12,16 +12,22 @@ public class User {
     private UserInfo userInfo;
     private List<UserNotification> notifications;
     private Cart cart;
+    private List<Order> orders;
     
     // CONSTRUCTORS:
     public User() {
 
     }
 
-    public User(String username, String password, UserPermission permission) {
+    public User(String username, String password, UserPermission permission, UserInfo userInfo,
+            List<UserNotification> notifications, Cart cart, List<Order> orders) {
         this.username = username;
         this.password = password;
         this.permission = permission;
+        this.userInfo = userInfo;
+        this.notifications = notifications;
+        this.cart = cart;
+        this.orders = orders;
     }
 
     // METHODS:
@@ -60,5 +66,11 @@ public class User {
     }
     public void setCart(Cart cart) {
         this.cart = cart;
+    }
+    public List<Order> getOrders() {
+        return orders;
+    }
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }
