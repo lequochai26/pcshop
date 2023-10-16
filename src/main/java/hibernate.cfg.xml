@@ -26,5 +26,6 @@
         <mapping class="gdu.pm05.group1.pcshop.model.User"/>
         <mapping class="gdu.pm05.group1.pcshop.model.UserInfo"/>
         <mapping class="gdu.pm05.group1.pcshop.model.Notification"/>
+        <mapping class="gdu.pm05.group1.pcshop.model.UserNotification"/>
     </session-factory>
 </hibernate-configuration>
