@@ -24,5 +24,6 @@
 
         <!-- Mapping classes -->
         <mapping class="gdu.pm05.group1.pcshop.model.User"/>
+        <mapping class="gdu.pm05.group1.pcshop.model.UserInfo"/>
     </session-factory>
 </hibernate-configuration>
