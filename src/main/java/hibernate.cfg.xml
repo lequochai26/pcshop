@@ -23,6 +23,6 @@
         <property name="hbm2ddl.auto">update</property>
 
         <!-- Mapping classes -->
-        
+        <mapping class="gdu.pm05.group1.pcshop.model.User"/>
     </session-factory>
 </hibernate-configuration>
