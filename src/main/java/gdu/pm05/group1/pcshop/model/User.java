@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -26,7 +27,8 @@ public class User {
     @Column (name = "permission", nullable = false)
     private UserPermission permission;
 
-    @OneToOne
+    @OneToOne (optional = true)
+    @JoinColumn (name = "username")
     private UserInfo userInfo;
 
     @OneToMany (
@@ -35,7 +37,8 @@ public class User {
     )
     private List<UserNotification> notifications;
 
-    @OneToOne
+    @OneToOne (optional = true)
+    @JoinColumn (name = "username")
     private Cart cart;
 
     @OneToMany (
