@@ -1,9 +1,34 @@
 package gdu.pm05.group1.pcshop.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity (name = "UserInformation")
+@Table (name = "UserInformation")
 public class UserNotification {
     // FIELDS:
+    @ManyToOne (fetch = FetchType.EAGER)
+    @Id
+    @JoinColumn (
+        name = "username",
+        referencedColumnName = "username"
+    )
     private User user;
+
+    @ManyToOne (fetch = FetchType.EAGER)
+    @Id
+    @JoinColumn (
+        name = "notificationId",
+        referencedColumnName = "id"
+    )
     private Notification notification;
+
+    @Column (name = "seen", nullable = false)
     private boolean seen;
 
     // CONSTRUCTORS:
