@@ -1,0 +1,71 @@
+.header {
+    /* Font/Text */
+    text-align: center;
+
+    /* Background */
+    background-color: rgb(0, 110, 255);
+    
+    /* Border */
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color:rgb(0, 42, 96);
+
+    /* Padding */
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.header * {
+    display: inline;
+    vertical-align: middle;
+    font-family: Arial;
+    font-size: 25px;
+    margin-left: 10px;
+}
+
+.header p {
+    color: white;
+}
+
+.header input[type="text"] {
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.pcshop_icon {
+    width: 125px;
+    height: 75px;
+}
+
+.kwinput {
+    width: 750px;
+    border-radius: 10px;
+}
+
+.header input[type="submit"], input[type="button"], button {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    background-color:transparent;
+    background-size: 50px;
+    border:none;
+}
+
+.searchBtn {
+    background-image: url("/pcshop/assets/search.png");
+}
+
+.loginBtn {
+    background-image: url("/pcshop/assets/login.png");
+}
+
+.notificationBtn {
+    background-image: url("/pcshop/assets/notification.png");
+}
+
+.cartBtn {
+    background-image: url("/pcshop/assets/cart.png");
+}

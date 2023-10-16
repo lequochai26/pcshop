@@ -1,0 +1,23 @@
+.leftArea {
+    /* Display */
+    display: inline-block;
+
+    /* Size */
+    width: 30%;
+    height: fit-content;
+
+    /* Vertical align */
+    vertical-align: top;
+}
+
+.rightArea {
+    /* Display */
+    display: inline-block;
+
+    /* Size */
+    width: 60%;
+    height: fit-content;
+    
+    /* Vertical align */
+    vertical-align: top;
+}
