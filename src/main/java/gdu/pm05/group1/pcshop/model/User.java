@@ -2,16 +2,46 @@ package gdu.pm05.group1.pcshop.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import gdu.pm05.group1.pcshop.model.enums.UserPermission;
 
+@Entity (name = "User")
+@Table (name = "User")
 public class User {
     // FIELDS:
+    @Id
+    @Column (name = "username")
     private String username;
+
+    @Column (name = "password", nullable = false)
     private String password;
+
+    @Column (name = "permission", nullable = false)
     private UserPermission permission;
+
+    @OneToOne
     private UserInfo userInfo;
+
+    @OneToMany (
+        fetch = FetchType.EAGER,
+        mappedBy = "user"
+    )
     private List<UserNotification> notifications;
+
+    @OneToOne
     private Cart cart;
+
+    @OneToMany (
+        fetch = FetchType.EAGER,
+        mappedBy = "user"
+    )
     private List<Order> orders;
     
     // CONSTRUCTORS:
