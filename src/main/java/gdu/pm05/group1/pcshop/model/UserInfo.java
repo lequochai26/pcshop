@@ -1,12 +1,34 @@
 package gdu.pm05.group1.pcshop.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity (name = "UserInfo")
+@Table (name = "UserInfo")
 public class UserInfo {
     // FIELDS:
+    @Id
+    @Column (name = "username")
     private String username;
+
+    @Column (name = "fullName", nullable = false)
     private String fullName;
+
+    @Column (name = "gender", nullable = false)
     private boolean gender;
+
+    @Column (name = "phoneNumbers", nullable = false)
     private String phoneNumbers;
+
+    @Column (name = "address", nullable = false)
     private String address;
+
+    @OneToOne (optional = false)
+    @JoinColumn (name = "username")
     private User user;
 
     // CONSTRUCTORS:
