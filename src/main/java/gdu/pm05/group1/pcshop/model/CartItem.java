@@ -1,9 +1,28 @@
 package gdu.pm05.group1.pcshop.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity (name = "CartItem")
+@Table (name = "CartItem")
 public class CartItem {
     // FIELDS:
+    @ManyToOne (fetch = FetchType.EAGER)
+    @Id
+    @JoinColumn (name = "cartUsername", referencedColumnName = "username")
     private Cart cart;
+
+    @ManyToOne (fetch = FetchType.EAGER)
+    @Id
+    @JoinColumn (name = "itemId", referencedColumnName = "id")
     private Item item;
+
+    @Column (name = "amount", nullable = false)
     private int amount;
 
     // CONSTRUCTORS:
