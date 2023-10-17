@@ -19,23 +19,11 @@ import org.hibernate.query.Query;
 import gdu.pm05.group1.pcshop.interfaces.Destroyable;
 
 public class DBHandler implements IDBHandler, Destroyable {
-    // STATIC FIELDS:
-    private static DBHandler instance = null;
-
-    // STATIC METHODS:
-    public static DBHandler getInstance() {
-        if (instance == null) {
-            instance = new DBHandler();
-        }
-
-        return instance;
-    }
-
     // FIELDS:
     private SessionFactory sessionFactory;
 
     // CONSTRUCTORS:
-    private DBHandler() {
+    public DBHandler() {
         // Create a blank configuration
         Configuration config = new Configuration();
 
