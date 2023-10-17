@@ -27,7 +27,7 @@ public class User {
     @Column (name = "permission", nullable = false)
     private UserPermission permission;
 
-    @OneToOne (optional = true)
+    @OneToOne (fetch = FetchType.EAGER, optional = true)
     @JoinColumn (name = "username")
     private UserInfo userInfo;
 
@@ -37,7 +37,7 @@ public class User {
     )
     private List<UserNotification> notifications;
 
-    @OneToOne (optional = true)
+    @OneToOne (fetch = FetchType.EAGER, optional = true)
     @JoinColumn (name = "username")
     private Cart cart;
 
