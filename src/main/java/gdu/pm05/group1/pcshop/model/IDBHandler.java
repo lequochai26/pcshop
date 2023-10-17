@@ -6,6 +6,6 @@ public interface IDBHandler {
     void save(Object... objects);
     void update(Object... objects);
     void remove(Object... objects);
-    <T> T get(Class<T> objClass, Object... parameters);
+    <T> T get(Class<T> objClass, Object target);
     <T> List<T> getAll();
 }
