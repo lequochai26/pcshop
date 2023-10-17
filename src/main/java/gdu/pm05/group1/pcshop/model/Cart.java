@@ -2,10 +2,27 @@ package gdu.pm05.group1.pcshop.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity (name = "Cart")
+@Table (name = "Cart")
 public class Cart {
     // FIELDS:
+    @Id
+    @Column (name = "username")
     private String username;
+
+    @OneToOne (optional = false)
+    @JoinColumn (name = "username")
     private User user;
+
+    @OneToMany (mappedBy = "cart")
     private List<CartItem> items;
 
     // CONSTRUCTORS:
