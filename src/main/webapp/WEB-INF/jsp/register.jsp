@@ -47,7 +47,7 @@
             <!-- Content box -->
             <div class="contentBox" style="padding-left: 25px; padding-right: 25px;">
                 <!-- Register form -->
-                <form>
+                <form action="register" method="post">
                     <!-- Register table -->
                     <table cellpadding="10">
                         <!-- Header row -->
@@ -137,6 +137,15 @@
                                 <jsp:include page="components/registerbutton.jsp"/>
                             </td>
                         </tr>
+
+                        <!-- Message row -->
+                        <c:if test="${not empty message}">
+                            <tr>
+                                <td colspan="2" style="color: red;">
+                                    ${message}
+                                </td>
+                            </tr>
+                        </c:if>
                     </table>
                 </form>
             </div>
