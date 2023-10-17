@@ -1,4 +1,4 @@
-package gdu.pm05.group1.pcshop.model;
+package gdu.pm05.group1.pcshop.model.dbhandler;
 
 public class HQLParameter {
     // FIELDS:
