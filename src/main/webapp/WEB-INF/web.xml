@@ -6,6 +6,11 @@
   <!-- Display name -->
   <display-name>Archetype Created Web Application</display-name>
 
+  <!-- Listeners -->
+  <listener>
+    <listener-class>gdu.pm05.group1.pcshop.listener.ContextListener</listener-class>
+  </listener>
+
   <!-- Welcome files -->
   <welcome-file-list>
     <welcome-file>home</welcome-file>
