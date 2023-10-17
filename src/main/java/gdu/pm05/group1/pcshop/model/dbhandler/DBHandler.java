@@ -17,19 +17,22 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
 import gdu.pm05.group1.pcshop.interfaces.Destroyable;
+import jakarta.servlet.ServletContext;
 
 public class DBHandler implements IDBHandler, Destroyable {
     // FIELDS:
     private SessionFactory sessionFactory;
 
     // CONSTRUCTORS:
-    public DBHandler() {
+    public DBHandler(ServletContext context) {
         // Create a blank configuration
         Configuration config = new Configuration();
 
         // Get config info from hibernate.cfg.xml file
         try {
-            config = config.configure();
+            config = config.configure(
+                context.getResource("hibernate.cfg.xml")
+            );
         }
         catch (Exception e) {
             e.printStackTrace();
