@@ -27,5 +27,12 @@
         <mapping class="gdu.pm05.group1.pcshop.model.UserInfo"/>
         <mapping class="gdu.pm05.group1.pcshop.model.Notification"/>
         <mapping class="gdu.pm05.group1.pcshop.model.UserNotification"/>
+        <mapping class="gdu.pm05.group1.pcshop.model.Cart"/>
+        <mapping class="gdu.pm05.group1.pcshop.model.CartItem"/>
+        <mapping class="gdu.pm05.group1.pcshop.model.Item"/>
+        <mapping class="gdu.pm05.group1.pcshop.model.ItemImage"/>
+        <mapping class="gdu.pm05.group1.pcshop.model.ItemType"/>
+        <mapping class="gdu.pm05.group1.pcshop.model.Order"/>
+        <mapping class="gdu.pm05.group1.pcshop.model.OrderItem"/>
     </session-factory>
 </hibernate-configuration>
