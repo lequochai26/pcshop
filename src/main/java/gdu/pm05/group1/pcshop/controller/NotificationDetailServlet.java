@@ -29,7 +29,7 @@ public class NotificationDetailServlet extends HttpServlet {
                 int intId = Integer.parseInt(id);
 
                 // Get notification with given id
-                Notification notification = Notification.getNotification(intId);
+                Notification notification = DBHandler
 
                 // Set notification as 'notification' attribute in request
                 request.setAttribute("notification", notification);
