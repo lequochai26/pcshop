@@ -76,6 +76,15 @@
                                 <jsp:include page="components/loginbutton.jsp"/>
                             </td>
                         </tr>
+
+                        <!-- Register URL -->
+                        <tr>
+                            <td colspan="2">
+                                <a href="register" style="font-size: 15px;">
+                                    Bạn chưa có tài khoản ? Nhấn vào đây để đăng ký!
+                                </a>
+                            </td>
+                        </tr>
                     </table>
                 </form>
             </div>
