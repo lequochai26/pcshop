@@ -10,8 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity (name = "UserInformation")
-@Table (name = "UserInformation")
+@Entity (name = "UserNotification")
+@Table (name = "UserNotification")
 public class UserNotification implements Serializable {
     // FIELDS:
     @ManyToOne (fetch = FetchType.EAGER)
