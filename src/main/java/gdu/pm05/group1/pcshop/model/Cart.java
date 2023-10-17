@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -18,11 +19,11 @@ public class Cart {
     @Column (name = "username")
     private String username;
 
-    @OneToOne (optional = false)
+    @OneToOne (fetch = FetchType.EAGER, optional = false)
     @JoinColumn (name = "username")
     private User user;
 
-    @OneToMany (mappedBy = "cart")
+    @OneToMany (fetch = FetchType.EAGER, mappedBy = "cart")
     private List<CartItem> items;
 
     // CONSTRUCTORS:
