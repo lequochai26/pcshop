@@ -16,7 +16,9 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
-public class DBHandler implements IDBHandler {
+import gdu.pm05.group1.pcshop.interfaces.Destroyable;
+
+public class DBHandler implements IDBHandler, Destroyable {
     // STATIC FIELDS:
     private static DBHandler instance = null;
 
@@ -59,6 +61,12 @@ public class DBHandler implements IDBHandler {
     }
 
     // METHODS:
+    @Override
+    public void destroy() {
+        // Close sessionFactory
+        sessionFactory.close();
+    }
+
     @Override
     public void save(Object... objects) {
         // Open session
