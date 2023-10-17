@@ -1,7 +1,10 @@
 package gdu.pm05.group1.pcshop.controller;
 
 import java.io.IOException;
-import gdu.pm05.group1.pcshop.domain.Notification;
+
+import gdu.pm05.group1.pcshop.model.Notification;
+import gdu.pm05.group1.pcshop.model.dbhandler.HQLParameter;
+import gdu.pm05.group1.pcshop.model.dbhandler.IDBHandler;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -22,14 +25,23 @@ public class NotificationDetailServlet extends HttpServlet {
         // Get id parameter
         String id = request.getParameter("id");
 
-        // Id null case
+        // Id not null case
         if (id != null) {
             try {
                 // Parse id string into an integer
                 int intId = Integer.parseInt(id);
 
+                // Get DBHandler
+                IDBHandler dbHandler = (IDBHandler)request.getServletContext().getAttribute("dbHandler");
+
                 // Get notification with given id
-                Notification notification = DBHandler
+                Notification notification = dbHandler.get(
+                    Notification.class,
+                    new HQLParameter(
+                        "id",
+                        intId
+                    )
+                );
 
                 // Set notification as 'notification' attribute in request
                 request.setAttribute("notification", notification);
