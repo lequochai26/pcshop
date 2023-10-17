@@ -17,11 +17,23 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
 public class DBHandler implements IDBHandler {
+    // STATIC FIELDS:
+    private static DBHandler instance = null;
+
+    // STATIC METHODS:
+    public static DBHandler getInstance() {
+        if (instance == null) {
+            instance = new DBHandler();
+        }
+
+        return instance;
+    }
+
     // FIELDS:
     private SessionFactory sessionFactory;
 
     // CONSTRUCTORS:
-    public DBHandler() {
+    private DBHandler() {
         // Create a blank configuration
         Configuration config = new Configuration();
 
