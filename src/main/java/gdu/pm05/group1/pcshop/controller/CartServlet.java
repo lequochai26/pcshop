@@ -1,4 +1,4 @@
-package gdu.pm05.group1.pcshop.presentation.servlets;
+package gdu.pm05.group1.pcshop.controller;
 
 import java.io.IOException;
 
@@ -9,10 +9,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet (name="register", urlPatterns="/register")
-public class RegisterServlet extends HttpServlet {
+@WebServlet (name = "cart", urlPatterns = "/cart")
+public class CartServlet extends HttpServlet {
     // CONSTRUCTORS:
-    public RegisterServlet() {
+    public CartServlet() {
         super();
     }
 
@@ -20,7 +20,7 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Get dispatcher
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/register.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/cart.jsp");
 
         // Forward
         dispatcher.forward(request, response);
@@ -30,4 +30,6 @@ public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         this.doGet(request, response);
     }
+
+    
 }

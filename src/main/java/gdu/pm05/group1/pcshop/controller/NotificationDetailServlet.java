@@ -1,4 +1,4 @@
-package gdu.pm05.group1.pcshop.presentation.servlets;
+package gdu.pm05.group1.pcshop.controller;
 
 import java.io.IOException;
 import gdu.pm05.group1.pcshop.domain.Notification;
