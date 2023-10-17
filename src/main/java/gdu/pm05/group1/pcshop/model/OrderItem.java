@@ -2,33 +2,31 @@ package gdu.pm05.group1.pcshop.model;
 
 public class OrderItem {
     // FIELDS:
-    private int orderId;
-    private String itemId;
+    private Order order;
+    private Item item;
     private int amount;
 
     // CONSTRUCTORS:
     public OrderItem() {
-
     }
-
-    public OrderItem(int orderId, String itemId, int amount) {
-        this.orderId = orderId;
-        this.itemId = itemId;
+    public OrderItem(Order order, Item item, int amount) {
+        this.order = order;
+        this.item = item;
         this.amount = amount;
     }
 
     // METHODS:
-    public int getOrderId() {
-        return orderId;
+    public Order getOrder() {
+        return order;
     }
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
+    public void setOrder(Order order) {
+        this.order = order;
     }
-    public String getItemId() {
-        return itemId;
+    public Item getItem() {
+        return item;
     }
-    public void setItemId(String itemId) {
-        this.itemId = itemId;
+    public void setItem(Item item) {
+        this.item = item;
     }
     public int getAmount() {
         return amount;
