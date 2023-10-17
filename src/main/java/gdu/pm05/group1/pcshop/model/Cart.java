@@ -1,6 +1,6 @@
 package gdu.pm05.group1.pcshop.model;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,16 +24,17 @@ public class Cart {
     private User user;
 
     @OneToMany (fetch = FetchType.EAGER, mappedBy = "cart")
-    private List<CartItem> items;
+    private Set<CartItem> items;
 
     // CONSTRUCTORS:
     public Cart() {
     }
-    public Cart(String username, User user, List<CartItem> items) {
+    public Cart(String username, User user, Set<CartItem> items) {
         this.username = username;
         this.user = user;
         this.items = items;
     }
+
 
     // METHODS:
     public String getUsername() {
@@ -48,10 +49,10 @@ public class Cart {
     public void setUser(User user) {
         this.user = user;
     }
-    public List<CartItem> getItems() {
+    public Set<CartItem> getItems() {
         return items;
     }
-    public void setItems(List<CartItem> items) {
+    public void setItems(Set<CartItem> items) {
         this.items = items;
     }
 }

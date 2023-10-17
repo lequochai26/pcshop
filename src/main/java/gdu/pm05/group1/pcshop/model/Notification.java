@@ -1,7 +1,7 @@
 package gdu.pm05.group1.pcshop.model;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,13 +33,13 @@ public class Notification {
         fetch = FetchType.EAGER,
         mappedBy = "notification"
     )
-    private List<UserNotification> users;
+    private Set<UserNotification> users;
 
     // CONSTRUCTORS:
     public Notification() {
     }
 
-    public Notification(int id, Date date, String title, String content, List<UserNotification> users) {
+    public Notification(int id, Date date, String title, String content, Set<UserNotification> users) {
         this.id = id;
         this.date = date;
         this.title = title;
@@ -72,10 +72,10 @@ public class Notification {
     public void setContent(String content) {
         this.content = content;
     }
-    public List<UserNotification> getUsers() {
+    public Set<UserNotification> getUsers() {
         return users;
     }
-    public void setUsers(List<UserNotification> users) {
+    public void setUsers(Set<UserNotification> users) {
         this.users = users;
     }
 }

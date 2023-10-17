@@ -1,6 +1,6 @@
 package gdu.pm05.group1.pcshop.model;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,7 +35,7 @@ public class User {
         fetch = FetchType.EAGER,
         mappedBy = "user"
     )
-    private List<UserNotification> notifications;
+    private Set<UserNotification> notifications;
 
     @OneToOne (fetch = FetchType.EAGER, optional = true)
     @JoinColumn (name = "username")
@@ -45,7 +45,7 @@ public class User {
         fetch = FetchType.EAGER,
         mappedBy = "user"
     )
-    private List<Order> orders;
+    private Set<Order> orders;
     
     // CONSTRUCTORS:
     public User() {
@@ -53,7 +53,7 @@ public class User {
     }
 
     public User(String username, String password, UserPermission permission, UserInfo userInfo,
-            List<UserNotification> notifications, Cart cart, List<Order> orders) {
+            Set<UserNotification> notifications, Cart cart, Set<Order> orders) {
         this.username = username;
         this.password = password;
         this.permission = permission;
@@ -88,10 +88,10 @@ public class User {
     public void setUserInfo(UserInfo userInfo) {
         this.userInfo = userInfo;
     }
-    public List<UserNotification> getNotifications() {
+    public Set<UserNotification> getNotifications() {
         return notifications;
     }
-    public void setNotifications(List<UserNotification> notifications) {
+    public void setNotifications(Set<UserNotification> notifications) {
         this.notifications = notifications;
     }
     public Cart getCart() {
@@ -100,10 +100,10 @@ public class User {
     public void setCart(Cart cart) {
         this.cart = cart;
     }
-    public List<Order> getOrders() {
+    public Set<Order> getOrders() {
         return orders;
     }
-    public void setOrders(List<Order> orders) {
+    public void setOrders(Set<Order> orders) {
         this.orders = orders;
     }
 }

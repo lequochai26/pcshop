@@ -1,6 +1,6 @@
 package gdu.pm05.group1.pcshop.model;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import gdu.pm05.group1.pcshop.model.enums.OrderStatus;
 
 @Entity (name = "Order")
-@Table (name = "Order")
+@Table (name = "Orders")
 public class Order {
     // FIELDS:
     @Id
@@ -27,8 +27,8 @@ public class Order {
     @Column (name = "status")
     private OrderStatus status;
 
-    @OneToMany (fetch = FetchType.EAGER, mappedBy = "Order")
-    private List<OrderItem> items;
+    @OneToMany (fetch = FetchType.EAGER, mappedBy = "order")
+    private Set<OrderItem> items;
 
     @ManyToOne (fetch = FetchType.EAGER)
     @JoinColumn (name = "username", referencedColumnName = "username")
@@ -38,7 +38,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(int id, double totalPrice, OrderStatus status, List<OrderItem> items, User user) {
+    public Order(int id, double totalPrice, OrderStatus status, Set<OrderItem> items, User user) {
         this.id = id;
         this.totalPrice = totalPrice;
         this.status = status;
@@ -65,10 +65,10 @@ public class Order {
     public void setStatus(OrderStatus status) {
         this.status = status;
     }
-    public List<OrderItem> getItems() {
+    public Set<OrderItem> getItems() {
         return items;
     }
-    public void setItems(List<OrderItem> items) {
+    public void setItems(Set<OrderItem> items) {
         this.items = items;
     }
     public User getUser() {

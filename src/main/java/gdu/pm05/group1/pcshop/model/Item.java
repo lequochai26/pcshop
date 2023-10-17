@@ -1,7 +1,6 @@
 package gdu.pm05.group1.pcshop.model;
 
-import java.util.List;
-
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -33,20 +32,20 @@ public class Item {
     private ItemType type;
 
     @OneToMany (fetch = FetchType.EAGER, mappedBy = "item")
-    private List<ItemImage> images;
+    private Set<ItemImage> images;
 
     @OneToMany (fetch = FetchType.EAGER, mappedBy = "item")
-    private List<CartItem> carts;
+    private Set<CartItem> carts;
 
     @OneToMany (fetch = FetchType.EAGER, mappedBy = "item")
-    private List<OrderItem> orders;
+    private Set<OrderItem> orders;
 
     // CONSTRUCTORS:
     public Item() {
     }
 
-    public Item(String id, String name, String description, double price, ItemType type, List<ItemImage> images,
-            List<CartItem> carts, List<OrderItem> orders) {
+    public Item(String id, String name, String description, double price, ItemType type, Set<ItemImage> images,
+            Set<CartItem> carts, Set<OrderItem> orders) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -88,22 +87,22 @@ public class Item {
     public void setType(ItemType type) {
         this.type = type;
     }
-    public List<ItemImage> getImages() {
+    public Set<ItemImage> getImages() {
         return images;
     }
-    public void setImages(List<ItemImage> images) {
+    public void setImages(Set<ItemImage> images) {
         this.images = images;
     }
-    public List<CartItem> getCarts() {
+    public Set<CartItem> getCarts() {
         return carts;
     }
-    public void setCarts(List<CartItem> carts) {
+    public void setCarts(Set<CartItem> carts) {
         this.carts = carts;
     }
-    public List<OrderItem> getOrders() {
+    public Set<OrderItem> getOrders() {
         return orders;
     }
-    public void setOrders(List<OrderItem> orders) {
+    public void setOrders(Set<OrderItem> orders) {
         this.orders = orders;
     }
 }

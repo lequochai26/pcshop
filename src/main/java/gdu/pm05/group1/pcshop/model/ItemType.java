@@ -1,6 +1,6 @@
 package gdu.pm05.group1.pcshop.model;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,13 +21,13 @@ public class ItemType {
     private String name;
 
     @OneToMany (fetch = FetchType.EAGER, mappedBy = "type")
-    private List<Item> items;
+    private Set<Item> items;
 
     // CONSTRUCTORS:
-    public ItemType(List<Item> items) {
+    public ItemType(Set<Item> items) {
         this.items = items;
     }
-    public ItemType(String id, String name, List<Item> items) {
+    public ItemType(String id, String name, Set<Item> items) {
         this.id = id;
         this.name = name;
         this.items = items;
@@ -46,10 +46,10 @@ public class ItemType {
     public void setName(String name) {
         this.name = name;
     }
-    public List<Item> getItems() {
+    public Set<Item> getItems() {
         return items;
     }
-    public void setItems(List<Item> items) {
+    public void setItems(Set<Item> items) {
         this.items = items;
     }
 }

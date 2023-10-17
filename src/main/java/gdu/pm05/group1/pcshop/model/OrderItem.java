@@ -1,5 +1,7 @@
 package gdu.pm05.group1.pcshop.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity (name = "OrderItem")
 @Table (name = "OrderItem")
-public class OrderItem {
+public class OrderItem implements Serializable {
     // FIELDS:
     @ManyToOne (fetch = FetchType.EAGER)
     @Id
