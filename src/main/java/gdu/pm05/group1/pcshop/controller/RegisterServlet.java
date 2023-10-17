@@ -18,13 +18,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet (name="register", urlPatterns="/register")
 public class RegisterServlet extends HttpServlet {
-    // FIELDS:
-    private IDBHandler dbHandler;
-
     // CONSTRUCTORS:
     public RegisterServlet() {
         super();
-        this.dbHandler = DBHandler.getInstance();
     }
 
     // METHODS:
@@ -40,7 +36,7 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Get parameters from request
-        String username = request.getParameter("username");
+        String username = request.getParameter("email");
         String password = request.getParameter("password");
         String fullName = request.getParameter("fullName");
         String genderStr = request.getParameter("sex");
@@ -53,11 +49,14 @@ public class RegisterServlet extends HttpServlet {
         String address = request.getParameter("address");
 
         // Validate phoneNumbers
-        if (!phoneNumbers.matches("^0\\d{10}$")) {
+        if (!phoneNumbers.matches("^0{1}\\d{9}$")) {
             request.setAttribute("message", "Số điện thoại không hợp lệ!");
             this.doGet(request, response);
             return;
         }
+
+        // Get DBHandler
+        IDBHandler dbHandler = (IDBHandler)request.getServletContext().getAttribute("dbHandler");
         
         // Get user from db with given username
         User user = dbHandler.get(
