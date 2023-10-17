@@ -132,19 +132,68 @@ public class DBHandler implements IDBHandler {
 
         // List
         List<T> list = query.list();
+
+        // Result declaration
+        T result = null;
         
         // List null case
         if (list == null) {
-            return null;
+            result = null;
         }
 
         // List's empty case
-        if (list.isEmpty()) {
+        else if (list.isEmpty()) {
+            result = null;
+        }
+
+        // Found case
+        else {
+            // Get target entity in DB and assign into result
+            result = list.get(0);
+        }
+
+        // Close session
+        this.closeSession(session);
+
+        // Return result
+        return result;
+    }
+
+    @Override
+    public <T> T get(Class<T> objClass, HQLParameter... parameters) {
+        // Open session
+        Session session = this.openSession();
+
+        // Session null case
+        if (session == null) {
             return null;
         }
 
-        // Get target entity in DB and names result
-        T result = list.get(0);
+        // Create get query
+        Query<T> query = this.createGetQuery(
+            session, null, objClass, parameters
+        );
+
+        // List
+        List<T> list = query.list();
+
+        // Result declaration
+        T result = null;
+
+        // List null case
+        if (list == null) {
+            result = null;
+        }
+
+        // List empty case
+        else if (list.isEmpty()) {
+            result = null;
+        }
+
+        // Found case
+        else {
+            result = list.get(0);
+        }
 
         // Close session
         this.closeSession(session);
@@ -189,6 +238,47 @@ public class DBHandler implements IDBHandler {
 
         // Create query
         Query<T> query = session.createQuery(hql, objClass);
+
+        // Return query
+        return query;
+    }
+
+    private <T> Query<T> createGetQuery(
+        Session session,
+        String entityName,
+        Class<T> objClass,
+        HQLParameter... parameters
+    ) {
+        // Create hql string
+        String hql = "FROM @entityName AS E WHERE @conditions";
+        
+        // Assign entity name for hql
+        hql = hql.replace("@entityName", entityName);
+
+        //  Conditions making
+        String condition = "";
+        for (HQLParameter parameter : parameters) {
+            if (!condition.isBlank()) {
+                condition += " AND ";
+            }
+
+            condition += "@paramName=:@paramName".replaceAll(
+                "@paramName", parameter.getName()
+            );
+        }
+
+        // Assign conditions for hql
+        hql = hql.replace(
+            "@conditions", condition
+        );
+
+        // Create query
+        Query<T> query = session.createQuery(hql, objClass);
+
+        // Set parameters for query
+        for (HQLParameter parameter : parameters) {
+            query.setParameter(parameter.getName(), parameter.getValue());
+        }
 
         // Return query
         return query;
