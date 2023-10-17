@@ -2,31 +2,43 @@ package gdu.pm05.group1.pcshop.model;
 
 import java.util.List;
 
-// - id: String
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-// - name: String
-
-// - description: String
-
-// - price: double
-
-// - type: ItemType
-
-// - images: List<ItemImage>
-
-// - carts: List<CartItem>
-
-// - orders: List<OrderItem>
-
+@Entity (name = "Item")
+@Table (name = "Item")
 public class Item {
     // FIELDS:
+    @Id
+    @Column (name = "id")
     private String id;
+
+    @Column (name = "name", nullable = false)
     private String name;
+
+    @Column (name = "description", nullable = false)
     private String description;
+
+    @Column (name = "price", nullable = false)
     private double price;
+
+    @ManyToOne (fetch = FetchType.EAGER)
+    @JoinColumn (name = "itemTypeId", referencedColumnName = "id")
     private ItemType type;
+
+    @OneToMany (fetch = FetchType.EAGER, mappedBy = "item")
     private List<ItemImage> images;
+
+    @OneToMany (fetch = FetchType.EAGER, mappedBy = "item")
     private List<CartItem> carts;
+
+    @OneToMany (fetch = FetchType.EAGER, mappedBy = "item")
     private List<OrderItem> orders;
 
     // CONSTRUCTORS:
