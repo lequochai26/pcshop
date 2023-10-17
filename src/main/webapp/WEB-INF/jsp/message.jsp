@@ -18,13 +18,31 @@
 
         <!-- CSS Files linking -->
         <link rel="stylesheet" href="./css/formpage.css"/>
+
+        <style>
+            .contentBox p {
+                /* Font */
+                font-family: Arial;
+                font-size: 25px;
+                font-weight: bold;
+            }
+        </style>
     </head>
 
     <body>
+        <!-- Header -->
+        <jsp:include page="header.jsp"/>
+
+        <!-- Body -->
         <div class="body">
-            <div class="content">
-                <p style="color: ${color}; text-align: left;">${message}</p>
+            <div class="contentBox">
+                <p style="color: ${color};">
+                    ${message}
+                </p>
             </div>
         </div>
+
+        <!-- Footer -->
+        <jsp:include page="footer.jsp"/>
     </body>
 </html>
