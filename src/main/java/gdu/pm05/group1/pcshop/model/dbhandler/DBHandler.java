@@ -160,6 +160,14 @@ public class DBHandler implements IDBHandler, Destroyable {
 
     @Override
     public <T> T get(Class<T> objClass, HQLParameter... parameters) {
+        // Get objClass's entity name
+        String entityName = this.getEntityName(objClass);
+
+        // objClass not entity case
+        if (entityName == null) {
+            return null;
+        }
+
         // Open session
         Session session = this.openSession();
 
@@ -170,7 +178,7 @@ public class DBHandler implements IDBHandler, Destroyable {
 
         // Create get query
         Query<T> query = this.createGetQuery(
-            session, null, objClass, parameters
+            session, entityName, objClass, parameters
         );
 
         // List
