@@ -1,9 +1,28 @@
 package gdu.pm05.group1.pcshop.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity (name = "OrderItem")
+@Table (name = "OrderItem")
 public class OrderItem {
     // FIELDS:
+    @ManyToOne (fetch = FetchType.EAGER)
+    @Id
+    @JoinColumn (name = "orderId", referencedColumnName = "id")
     private Order order;
+
+    @ManyToOne (fetch = FetchType.EAGER)
+    @Id
+    @JoinColumn (name = "itemId", referencedColumnName = "id")
     private Item item;
+
+    @Column (name = "amount", nullable = false)
     private int amount;
 
     // CONSTRUCTORS:
