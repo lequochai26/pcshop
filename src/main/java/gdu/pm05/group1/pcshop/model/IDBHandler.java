@@ -4,8 +4,7 @@ import java.util.List;
 
 public interface IDBHandler {
     void save(Object... objects);
-    void update(Object... objects);
     void remove(Object... objects);
-    <T> T get(Class<T> objClass, Object target);
-    <T> List<T> getAll();
+    <T> T get(Class<T> objClass, T target);
+    <T> List<T> getAll(Class<T> objClass);
 }
