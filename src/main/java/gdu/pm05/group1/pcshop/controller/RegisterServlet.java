@@ -5,7 +5,6 @@ import java.io.IOException;
 import gdu.pm05.group1.pcshop.model.Cart;
 import gdu.pm05.group1.pcshop.model.User;
 import gdu.pm05.group1.pcshop.model.UserInfo;
-import gdu.pm05.group1.pcshop.model.dbhandler.DBHandler;
 import gdu.pm05.group1.pcshop.model.dbhandler.HQLParameter;
 import gdu.pm05.group1.pcshop.model.dbhandler.IDBHandler;
 import gdu.pm05.group1.pcshop.model.enums.UserPermission;
