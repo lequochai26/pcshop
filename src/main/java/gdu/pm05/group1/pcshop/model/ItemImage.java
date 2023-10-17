@@ -1,9 +1,26 @@
 package gdu.pm05.group1.pcshop.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity (name = "ItemImage")
+@Table (name = "ItemImage")
 public class ItemImage {
     // FIELDS:
+    @Id
+    @Column (name = "id")
     private int id;
+
+    @Column (name = "content", nullable = false)
     private byte[] content;
+
+    @ManyToOne (fetch = FetchType.EAGER)
+    @JoinColumn (name = "itemId", referencedColumnName = "id")
     private Item item;
 
     // CONSTRUCTORS:
