@@ -7,6 +7,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 public class UserValidator implements Validator<User> {
+    // STATIC FIELDS:
+    private static UserValidator instance = new UserValidator();
+
+    // STATIC METHODS:
+    public static UserValidator getInstance() {
+        return instance;
+    }
+
     // CONSTRUCTORS:
     private UserValidator() {
 
