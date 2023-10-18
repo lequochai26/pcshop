@@ -64,7 +64,7 @@ public class UserValidator implements Validator<User> {
                 }
                 else {
                     // Refresh for current user
-                    // To be continue...
+                    dbHandler.refresh(user);
                 }
             }
         }
