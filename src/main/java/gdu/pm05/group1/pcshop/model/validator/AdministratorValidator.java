@@ -11,8 +11,16 @@ import gdu.pm05.group1.pcshop.model.dbhandler.IDBHandler;
 import gdu.pm05.group1.pcshop.model.enums.UserPermission;
 
 public class AdministratorValidator implements Validator {
+    // STATIC FIELDS:
+    private static AdministratorValidator instance = new AdministratorValidator();
+
+    // STATIC METHODS:
+    public static AdministratorValidator getInstance() {
+        return instance;
+    }
+
     // CONSTRUCTORS:
-    public AdministratorValidator() {
+    private AdministratorValidator() {
 
     }
 
