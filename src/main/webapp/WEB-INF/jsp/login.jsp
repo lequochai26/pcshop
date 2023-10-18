@@ -34,7 +34,7 @@
             <!-- Login box -->
             <div class="contentBox">
                 <!-- Login form -->
-                <form>
+                <form action="login" method="post">
                     <!-- Login table -->
                     <table cellpadding="10">
                         <!-- Title Row -->
@@ -76,6 +76,17 @@
                                 <jsp:include page="components/loginbutton.jsp"/>
                             </td>
                         </tr>
+
+                        <!-- Message -->
+                        <c:if test="${not empty message}">
+                            <tr>
+                                <td colspan="2">
+                                    <p style="font-family: Arial; font-size: 18px; color: red">
+                                        ${message}
+                                    </p>
+                                </td>
+                            </tr>
+                        </c:if>
 
                         <!-- Register URL -->
                         <tr>
