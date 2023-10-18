@@ -17,6 +17,7 @@
 
         <!-- CSS files linking -->
         <link rel="stylesheet" href="./css/formpage.css"/>
+        <link rel="stylesheet" href="./css/administrator.css"/>
     </head>
 
     <body>
@@ -28,22 +29,22 @@
             <!-- Content box -->
             <div class="contentBox">
                 <!-- Items management -->
-                <a href="itemsmanagement">
+                <a href="itemsmanagement" class="itemsManagementUrl">
                     Quản lý thông tin sản phẩm
                 </a>
 
                 <!-- Item types management -->
-                <a href="itemtypesmanagement">
+                <a href="itemtypesmanagement" class="itemTypesManagementUrl">
                     Quản lý thông tin loại sản phẩm
                 </a>
 
                 <!-- Orders management -->
-                <a href="ordersmanagement">
+                <a href="ordersmanagement" class="ordersManagementUrl">
                     Quản lý thông tin đơn hàng
                 </a>
 
                 <!-- Users management -->
-                <a href="usersmanagement">
+                <a href="usersmanagement" class="usersManagementUrl">
                     Quản lý thông tin người dùng
                 </a>
             </div>
