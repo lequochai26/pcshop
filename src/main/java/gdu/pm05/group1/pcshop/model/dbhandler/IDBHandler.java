@@ -8,4 +8,5 @@ public interface IDBHandler {
     <T> T get(Class<T> objClass, T target);
     <T> T get(Class<T> objClass, HQLParameter... parameters);
     <T> List<T> getAll(Class<T> objClass);
+    void refresh(Object... objects);
 }
