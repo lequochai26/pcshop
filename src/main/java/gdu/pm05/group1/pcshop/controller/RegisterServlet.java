@@ -1,19 +1,23 @@
 package gdu.pm05.group1.pcshop.controller;
 
 import java.io.IOException;
+import java.util.Set;
 
 import gdu.pm05.group1.pcshop.model.Cart;
+import gdu.pm05.group1.pcshop.model.CartItem;
 import gdu.pm05.group1.pcshop.model.User;
 import gdu.pm05.group1.pcshop.model.UserInfo;
 import gdu.pm05.group1.pcshop.model.dbhandler.HQLParameter;
 import gdu.pm05.group1.pcshop.model.dbhandler.IDBHandler;
 import gdu.pm05.group1.pcshop.model.enums.UserPermission;
 import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet (name="register", urlPatterns="/register")
 public class RegisterServlet extends HttpServlet {
@@ -34,6 +38,15 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Get context
+        ServletContext context = request.getServletContext();
+
+        // Get DBHandler
+        IDBHandler dbHandler = (IDBHandler)context.getAttribute("dbHandler");
+
+        // Get session without creation
+        HttpSession session = request.getSession(false);
+
         // Get parameters from request
         String username = request.getParameter("email");
         String password = request.getParameter("password");
@@ -53,9 +66,6 @@ public class RegisterServlet extends HttpServlet {
             this.doGet(request, response);
             return;
         }
-
-        // Get DBHandler
-        IDBHandler dbHandler = (IDBHandler)request.getServletContext().getAttribute("dbHandler");
         
         // Get user from db with given username
         User user = dbHandler.get(
@@ -75,8 +85,33 @@ public class RegisterServlet extends HttpServlet {
 
         // Create new user
         user = new User();
+
+        // Create new user info
         UserInfo userInfo = new UserInfo();
-        Cart cart = new Cart();
+
+        // Get or create a new cart
+        Cart cart = null;
+        Set<CartItem> cartItems = null;
+        if (session != null) {
+            cart = (Cart)session.getAttribute("cart");
+        }
+
+        if (cart == null) {
+            // Create a new cart
+            cart = new Cart();
+        }
+        else {
+            // Connect cart items to cart
+            cartItems = cart.getItems();
+            if (cartItems.isEmpty()) {
+                cartItems = null;
+            }
+            if (cartItems != null) {
+                for (CartItem cartItem : cartItems) {
+                    cartItem.setCart(cart);
+                }
+            }
+        }
 
         // Set user's informations
         user.setUsername(username);
@@ -98,7 +133,17 @@ public class RegisterServlet extends HttpServlet {
         cart.setUser(user);
 
         // Save all data related to user to database
-        dbHandler.save(user, userInfo, cart);
+        if (cartItems == null) {
+            dbHandler.save(user, userInfo, cart);
+        }
+        else {
+            dbHandler.save(
+                user,
+                userInfo,
+                cart,
+                cartItems.toArray(new CartItem[]{})
+            );
+        }
 
         // Set attributes for request
         request.setAttribute("color", "green");
