@@ -26,18 +26,21 @@ public class AdministratorValidator implements Validator {
 
     // METHODS:
     @Override
-    public void validate(Object... params) {
+    public void validate(Map<String, Object> validationResult, Object... params) {
         // Get request
         HttpServletRequest request = (HttpServletRequest)params[0];
 
-        // Get validate result
-        Map<String, Object> validateResult = (Map<String, Object>)params[1];
-
         // Validating
-        this.validate(request, validateResult);
+        this.validate(validationResult, request);
     }
 
-    private void validate(HttpServletRequest request, Map<String, Object> validateResult) {
+    private void validate(
+        Map<String, Object> validationResult,
+        HttpServletRequest request
+    ) {
+        // Set default isAdministrator property for validationResult
+        validationResult.put("isAdministrator", false);
+
         // Get session
         HttpSession session = request.getSession(false);
 
@@ -60,25 +63,9 @@ public class AdministratorValidator implements Validator {
 
                 // isAdministrator true if permission is ADMIN and otherwise, false
                 if (permission == UserPermission.ADMIN) {
-                    validateResult.put("isAdministrator", true);
-                }
-                else {
-                    validateResult.put(
-                        "isAdministrator", false
-                    );
+                    validationResult.put("isAdministrator", true);
                 }
             }
-            else {
-                validateResult.put(
-                    "isAdministrator", false
-                );
-            }
-        }
-        else {
-            // Set validate result of "isAdministrator"
-            validateResult.put(
-                "isAdministrator", false
-            );
         }
     }
 }
