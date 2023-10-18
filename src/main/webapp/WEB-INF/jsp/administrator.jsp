@@ -27,7 +27,25 @@
         <div class="body">
             <!-- Content box -->
             <div class="contentBox">
-                Hello World!
+                <!-- Items management -->
+                <a href="itemsmanagement">
+                    Quản lý thông tin sản phẩm
+                </a>
+
+                <!-- Item types management -->
+                <a href="itemtypesmanagement">
+                    Quản lý thông tin loại sản phẩm
+                </a>
+
+                <!-- Orders management -->
+                <a href="ordersmanagement">
+                    Quản lý thông tin đơn hàng
+                </a>
+
+                <!-- Users management -->
+                <a href="usersmanagement">
+                    Quản lý thông tin người dùng
+                </a>
             </div>
         </div>
 
