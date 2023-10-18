@@ -1,5 +1,7 @@
 package gdu.pm05.group1.pcshop.model.validator;
 
+import java.util.Map;
+
 import gdu.pm05.group1.pcshop.model.User;
 import gdu.pm05.group1.pcshop.model.dbhandler.IDBHandler;
 import jakarta.servlet.ServletContext;
@@ -22,15 +24,18 @@ public class UserValidator implements Validator {
 
     // METHODS:
     @Override
-    public void validate(Object... params) {
+    public void validate(Map<String, Object> validationResult, Object... params) {
         // Get request
         HttpServletRequest request = (HttpServletRequest)params[0];
 
         // Validating
-        this.validate(request);
+        this.validate(validationResult, request);
     }
 
-    private void validate(HttpServletRequest request) {
+    private void validate(Map<String, Object> validationResult, HttpServletRequest request) {
+        // Set default userValid for validationResult
+        validationResult.put("userValid", false);
+
         // Get session
         HttpSession session = request.getSession(false);
 
@@ -70,9 +75,13 @@ public class UserValidator implements Validator {
                     // Remove user attribute from session
                     session.removeAttribute("user");
                 }
+                // Valid
                 else {
                     // Refresh for current user
                     dbHandler.refresh(user);
+
+                    // Update userValid for validationResult
+                    validationResult.put("userValid", true);
                 }
             }
         }
