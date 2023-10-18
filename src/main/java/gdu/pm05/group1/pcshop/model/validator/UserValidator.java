@@ -22,15 +22,15 @@ public class UserValidator implements Validator<User> {
 
     // METHODS:
     @Override
-    public void validate(User target, Object... params) {
+    public void validate(Object... params) {
         // Get request
         HttpServletRequest request = (HttpServletRequest)params[0];
 
         // Validating
-        this.validate(target, request);
+        this.validate(request);
     }
 
-    private void validate(User target, HttpServletRequest request) {
+    private void validate(HttpServletRequest request) {
         // Get session
         HttpSession session = request.getSession(false);
 
