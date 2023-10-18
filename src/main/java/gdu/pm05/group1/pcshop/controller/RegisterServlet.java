@@ -29,6 +29,24 @@ public class RegisterServlet extends HttpServlet {
     // METHODS:
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Get session
+        HttpSession session = request.getSession(false);
+
+        // User logged in case
+        if (session != null) {
+            if (session.getAttribute("user") != null) {
+                RequestDispatcher messageDispatcher = request.getRequestDispatcher(
+                    "WEB-INF/jsp/message.jsp"
+                );
+
+                request.setAttribute("color", "black");
+                request.setAttribute("message", "Hiện tại, bạn đang đăng nhập rồi!");
+
+                messageDispatcher.forward(request, response);
+                return;
+            }
+        }
+
         // Get dispatcher
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/register.jsp");
 
