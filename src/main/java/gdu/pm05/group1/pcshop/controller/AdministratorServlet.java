@@ -31,27 +31,15 @@ public class AdministratorServlet extends HttpServlet {
     // METHODS:
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Validate user
-        userValidator.validate(request);
+        // Validation
+        boolean isValid = this.validateAdministrator(request, response);
 
-        // Create a validate result set
-        Map<String, Object> administratorValidateResult = new HashMap<>();
-
-        // Validate administrator
-        administratorValidator.validate(request, administratorValidateResult);
-
-        // Retrieve validating result
-        boolean isAdministrator = (boolean)administratorValidateResult.get("isAdministrator");
-
-        // If not administrator
-        if (!isAdministrator) {
-            RequestDispatcher messageDispatcher = request.getRequestDispatcher("WEB-INF/jsp/message.jsp");
-            request.setAttribute("message", "Bạn không có quyền truy cập vào trang này!");
-            request.setAttribute("color", "red");
-            messageDispatcher.forward(request, response);
+        // VALIDATION FAILED
+        if (!isValid) {
             return;
         }
 
+        // VALIDATION SUCCESSFULLY
         // Get dispatcher
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/administrator.jsp");
 
@@ -68,10 +56,66 @@ public class AdministratorServlet extends HttpServlet {
      * @param request HttpServletRequest object
      * @param response HttpServletResponse object
      * @return validation status: (true: validation complete | false: validation failed)
+     * @throws IOException
+     * @throws ServletException
      */
-    protected boolean validateAdministrator(HttpServletRequest request, HttpServletResponse response) {
+    protected boolean validateAdministrator(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Create a validation result map
+        Map<String, Object> validationResult = new HashMap<>();
+
         // USER VALIDATION
-        
+        userValidator.validate(validationResult, request);
+
+        // Get userValid result from validation result map
+        boolean userValid = (boolean)validationResult.get("userValid");
+
+        // User validation failed
+        if (!userValid) {
+            // Format message
+            request.setAttribute("color", "red");
+            request.setAttribute(
+                "message",
+                "Bạn chưa đăng nhập hoặc phiên đăng nhập của bạn không hợp lệ! Vui lòng đăng nhập hoặc đăng nhập lại!"
+            );
+
+            // Get dispatcher
+            RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/message.jsp");
+
+            // Forward
+            dispatcher.forward(request, response);
+
+            return false;
+        }
+
+        // ADMINISTRATOR VALIDATION
+        // Clear validation result map
+        validationResult.clear();
+
+        // Administrator validation
+        administratorValidator.validate(validationResult, request);
+
+        // Retrieve isAdministrator result from administrator validator
+        boolean isAdministrator = (boolean)validationResult.get("isAdministrator");
+
+        // Administrator validation failed
+        if (!isAdministrator) {
+            // Format message
+            request.setAttribute("color", "red");
+            request.setAttribute(
+                "message",
+                "Bạn không có quyền truy cập vào trang này!"
+            );
+
+            // Get dispatcher
+            RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/message.jsp");
+
+            // Forward
+            dispatcher.forward(request, response);
+
+            return false;
+        }
+
+        // VALIDATION SUCCESSFULLY
         return true;
     }
 }
