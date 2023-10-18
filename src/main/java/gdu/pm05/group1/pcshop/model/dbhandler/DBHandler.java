@@ -235,6 +235,25 @@ public class DBHandler implements IDBHandler, Destroyable {
         return all;
     }
 
+    @Override
+    public void refresh(Object... objects) {
+        // Open session
+        Session session = this.openSession();
+
+        // Session null case
+        if (session == null) {
+            return;
+        }
+
+        // Refreshing objects
+        for (Object object : objects) {
+            session.refresh(object);
+        }
+
+        // Close session
+        this.closeSession(session);
+    }
+
     private <T> Query<T> createGetAllQuery(
         Session session,
         String entityName,
