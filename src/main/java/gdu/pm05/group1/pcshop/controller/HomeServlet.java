@@ -1,6 +1,8 @@
 package gdu.pm05.group1.pcshop.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import gdu.pm05.group1.pcshop.model.validator.UserValidator;
 import gdu.pm05.group1.pcshop.model.validator.Validator;
@@ -28,8 +30,11 @@ public class HomeServlet extends HttpServlet {
         HttpServletRequest request,
         HttpServletResponse response
     ) throws ServletException, IOException {
+        // Create a validation result map
+        Map<String, Object> validationResult = new HashMap<>();
+
         // User validating
-        userValidator.validate(request);
+        userValidator.validate(validationResult, request);
 
         // Get dispatcher
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/homepage.jsp");
