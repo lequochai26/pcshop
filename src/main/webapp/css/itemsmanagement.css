@@ -4,7 +4,7 @@
 
     /* Size */
     width: 200px;
-    height: 300px;
+    height: 350px;
 
     /* Border */
     border: 1px solid black;
@@ -56,7 +56,7 @@
 
     /* Font/text */
     font-family: Arial;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bold;
     text-align: justify;
 }
@@ -75,7 +75,7 @@
     text-align: justify;
 }
 
-.itemBox .viewItemBox {
+.itemBox .urlBox {
     /* Display */
     display: block;
 
@@ -85,11 +85,11 @@
 
     /* Font/Text */
     font-family: Arial;
-    font-size: 20px;
+    font-size: 15px;
     text-align: center;
 }
 
-.itemBox .viewItemBox .viewItemUrl {
+.url {
     /* Display */
     display: inline-block;
 

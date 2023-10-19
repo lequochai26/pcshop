@@ -27,29 +27,42 @@
         <div class="body">
 
             <!-- Content box -->
-            <div class="contentBox">
-                <!-- Displaying all items as item boxes -->
-                <c:forEach var="item" items="${items}">
-                    <div class="itemBox">
-                        <div class="itemImageBox">
-                            <img src="itemimage?id=${item.avatar.id}" class="itemImage"/>
-                        </div>
+            <div class="contentBox" style="width: 100%; text-align: justify;">
+                <div style="margin-bottom: 25px;">
+                    <a href="itemmanagement?action=new" class="url" style="font-family: Arial; font-size: 25px; font-weight: bold;">
+                        Thêm mới sản phẩm
+                    </a>
+                </div>
+                <div>
+                    <!-- Displaying all items as item boxes -->
+                    <c:forEach var="item" items="${items}">
+                        <div class="itemBox">
+                            <div class="itemImageBox">
+                                <img src="itemimage?id=${item.avatar.id}" class="itemImage"/>
+                            </div>
 
-                        <div class="itemNameBox">
-                            ${item.name}
-                        </div>
+                            <div class="itemNameBox">
+                                ${item.name}
+                            </div>
 
-                        <div class="itemPriceBox">
-                            <b>Giá: </b> ${item.price}
-                        </div>
+                            <div class="itemPriceBox">
+                                <b>Giá: </b> ${item.price}
+                            </div>
 
-                        <div class="viewItemBox">
-                            <a href="itemmanagement?id=${item.id}" class="viewItemUrl">
-                                Xem sản phẩm
-                            </a>
+                            <div class="urlBox">
+                                <a href="itemmanagement?action=detail&id=${item.id}" class="url">
+                                    Xem sản phẩm
+                                </a>
+                            </div>
+
+                            <div class="urlBox">
+                                <a href="deleteitem?id=${item.id}" class="url">
+                                    Xóa sản phẩm
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                </c:forEach>
+                    </c:forEach>
+                </div>
             </div>
 
         </div>
