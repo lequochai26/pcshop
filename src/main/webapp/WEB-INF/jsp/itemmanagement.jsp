@@ -43,7 +43,7 @@
                 <form action="newitem" method="post">
                     <!-- Hidden ID input for detail action -->
                     <c:if test="${param.action == 'detail'}">
-                        <input name="id" value="${item.id}"/>
+                        <input name="id" value="${item.id}" hidden/>
                     </c:if>
 
                     <!-- Item management table -->
@@ -56,9 +56,7 @@
                                 </td>
     
                                 <td>
-                                    <c:set var="textBoxId" scope="request" value="id"/>
-                                    <c:set var="textBoxName" scope="request" value="id"/>
-                                    <jsp:include page="components/textbox.jsp"/>
+                                    <input type="text" id="id" name="id" class="textbox" required />
                                 </td>
                             </tr>
                         </c:if>
@@ -70,22 +68,29 @@
                             </td>
 
                             <td>
-                                <c:set var="textBoxId" scope="request" value="name"/>
-                                <c:set var="textBoxName" scope="request" value="name"/>
-                                <jsp:include page="components/textbox.jsp"/>
+                                <input type="text" id="name" name="name" value="${item.name}" class="textbox" required />
                             </td>
                         </tr>
 
                         <!-- Price row -->
                         <tr>
                             <td>
-                                <label for="price">Đơn giá:</label>
+                                <label for="price" class="label">Đơn giá:</label>
                             </td>
 
                             <td>
-                                <c:set var="textBoxId" scope="request" value="price"/>
-                                <c:set var="textBoxName" scope="request" value="price"/>
-                                <jsp:include page="components/textbox.jsp"/>
+                                <input type="number" id="price" name="price" value="${item.price}" class="textbox" required/>
+                            </td>
+                        </tr>
+
+                        <!-- Description row -->
+                        <tr>
+                            <td>
+                                <label for="description" class="label">Mô tả sản phẩm:</label>
+                            </td>
+
+                            <td>
+                                <textarea id="description" name="description" class="areaBox" required>${item.description}</textarea>
                             </td>
                         </tr>
                     </table>
