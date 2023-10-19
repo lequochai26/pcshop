@@ -3,6 +3,7 @@ package gdu.pm05.group1.pcshop.controller;
 import java.io.IOException;
 import java.util.List;
 
+import gdu.pm05.group1.pcshop.controller.util.MultipartUtil;
 import gdu.pm05.group1.pcshop.model.Item;
 import gdu.pm05.group1.pcshop.model.ItemType;
 import gdu.pm05.group1.pcshop.model.dbhandler.HQLParameter;
@@ -10,11 +11,13 @@ import gdu.pm05.group1.pcshop.model.dbhandler.IDBHandler;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet (name = "itemmanagement", urlPatterns = "/itemmanagement")
+@MultipartConfig
 public class ItemManagementServlet extends AdministratorServlet {
     // CONSTRUCTORS:
     public ItemManagementServlet() {
@@ -111,8 +114,29 @@ public class ItemManagementServlet extends AdministratorServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        this.doGet(req, resp);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Get action parameter
+        String action = MultipartUtil.readPartAsString(
+            request.getPart("action")
+        );
+
+        // Endpoint location definition
+        String endpoint = null;
+
+        // Action new case
+        if (action.equals("new")) {
+            endpoint = "newitem";
+        }
+        // Action detail case
+        else if (action.equals("detail")) {
+            endpoint = "edititem";
+        }
+
+        // Get request dispatcher
+        RequestDispatcher dispatcher = request.getRequestDispatcher(endpoint);
+
+        // Forward
+        dispatcher.forward(request, response);
     }
 
     private void showMessage(HttpServletRequest request, HttpServletResponse response, String message, String color) throws ServletException, IOException {
