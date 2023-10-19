@@ -90,7 +90,22 @@
                             </td>
 
                             <td>
-                                <textarea id="description" name="description" class="areaBox" required>${item.description}</textarea>
+                                <textarea id="description" name="description" class="areabox" style="font-size: 18px;" required>${item.description}</textarea>
+                            </td>
+                        </tr>
+
+                        <!-- Type row -->
+                        <tr>
+                            <td>
+                                <label for="type" class="label">Loại sản phẩm:</label>
+                            </td>
+
+                            <td>
+                                <select id="type" name="type" class="textbox">
+                                    <c:forEach var="itemType" items="${itemTypes}">
+                                        <option value="${itemType.id}">${itemType.id} - ${itemType.name}</option>
+                                    </c:forEach>
+                                </select>
                             </td>
                         </tr>
                     </table>
