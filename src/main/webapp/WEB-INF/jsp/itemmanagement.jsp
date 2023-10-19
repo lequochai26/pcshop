@@ -13,7 +13,7 @@
                     Thêm mới sản phẩm
                 </c:when>
                 <c:when test="${param.action == 'detail'}" >
-                    Chi tiết sản phẩm
+                    ${item.name}
                 </c:when>
             </c:choose>
         </title>
