@@ -49,17 +49,20 @@ public class Item {
     public Item() {
     }
 
-    public Item(String id, String name, String description, double price, ItemType type, Set<ItemImage> images,
-            Set<CartItem> carts, Set<OrderItem> orders) {
+    public Item(String id, String name, String description, double price, ItemType type, ItemImage avatar,
+            Set<ItemImage> images, Set<CartItem> carts, Set<OrderItem> orders) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.type = type;
+        this.avatar = avatar;
         this.images = images;
         this.carts = carts;
         this.orders = orders;
     }
+
+
 
     // METHODS:
     public String getId() {
@@ -109,5 +112,11 @@ public class Item {
     }
     public void setOrders(Set<OrderItem> orders) {
         this.orders = orders;
+    }
+    public ItemImage getAvatar() {
+        return avatar;
+    }
+    public void setAvatar(ItemImage avatar) {
+        this.avatar = avatar;
     }
 }
