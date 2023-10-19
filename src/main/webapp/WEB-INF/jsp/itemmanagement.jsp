@@ -48,7 +48,7 @@
             <div class="contentBox">
 
                 <!-- Item management form -->
-                <form action="itemmanagement" method="post">
+                <form action="itemmanagement" method="post" enctype="multipart/form-data">
                     <!-- Hidden action input -->
                     <input name="action" value="${param.action}" hidden/>
 
