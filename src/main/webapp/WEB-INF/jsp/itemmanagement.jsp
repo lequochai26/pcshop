@@ -24,7 +24,7 @@
 
             <!-- CSS files linking -->
             <link rel="stylesheet" href="./css/formpage.css"/>
-
+            <link rel="stylesheet" href="./css/itemmanagement.css"/>
         </title>
 
         <body>
