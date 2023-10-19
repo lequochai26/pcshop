@@ -27,13 +27,13 @@
         <div class="body">
 
             <!-- Content box -->
-            <div class="contentBox" style="width: 100%; text-align: justify;">
+            <div class="contentBox">
                 <div style="margin-bottom: 25px;">
                     <a href="itemmanagement?action=new" class="url" style="font-family: Arial; font-size: 25px; font-weight: bold;">
                         Thêm mới sản phẩm
                     </a>
                 </div>
-                <div>
+                <div style="width: 100%; text-align: justify;">
                     <!-- Displaying all items as item boxes -->
                     <c:forEach var="item" items="${items}">
                         <div class="itemBox">
