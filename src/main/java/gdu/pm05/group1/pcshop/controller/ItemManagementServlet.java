@@ -1,8 +1,10 @@
 package gdu.pm05.group1.pcshop.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import gdu.pm05.group1.pcshop.model.Item;
+import gdu.pm05.group1.pcshop.model.ItemType;
 import gdu.pm05.group1.pcshop.model.dbhandler.HQLParameter;
 import gdu.pm05.group1.pcshop.model.dbhandler.IDBHandler;
 import jakarta.servlet.RequestDispatcher;
@@ -62,6 +64,10 @@ public class ItemManagementServlet extends AdministratorServlet {
             return;
         }
 
+        // Get dbHandler
+        ServletContext context = request.getServletContext();
+        IDBHandler dbHandler = (IDBHandler)context.getAttribute("dbHandler");
+
         // Action detail case
         if (action.equals("detail")) {
             // Get ID parameter
@@ -79,10 +85,6 @@ public class ItemManagementServlet extends AdministratorServlet {
                 return;
             }
 
-            // Get dbHandler
-            ServletContext context = request.getServletContext();
-            IDBHandler dbHandler = (IDBHandler)context.getAttribute("dbHandler");
-
             // Get item with given id
             Item item = dbHandler.get(
                 Item.class,
@@ -92,6 +94,12 @@ public class ItemManagementServlet extends AdministratorServlet {
             // Set item as an attribute to request
             request.setAttribute("item", item);
         }
+
+        // Get all item types
+        List<ItemType> itemTypes = dbHandler.getAll(ItemType.class);
+
+        // Set itemTypes attribute for request
+        request.setAttribute("itemTypes", itemTypes);
 
         // Get request dispatcher
         RequestDispatcher dispatcher = request.getRequestDispatcher(
