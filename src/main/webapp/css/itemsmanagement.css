@@ -9,6 +9,9 @@
     /* Border */
     border: 1px solid black;
     border-radius: 10px;
+
+    /* Text align */
+    text-align: center;
 }
 
 .itemBox div {
@@ -16,21 +19,31 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    /* Margin */
+    margin: 5px;
 }
 
 .itemBox .itemImageBox {
     /* Display */
-    display: block;
+    display: inline-block;
 
     /* Size */
     width: 175px;
     height: 175px;
+
+    /* Border */
+    border: 1px solid black;
+    border-radius: 10px;
 }
 
 .itemBox .itemImageBox .itemImage {
     /* Size */
     width: inherit;
     height: inherit;
+
+    /* Border */
+    border-radius: inherit;
 }
 
 .itemBox .itemNameBox {
