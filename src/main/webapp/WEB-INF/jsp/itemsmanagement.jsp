@@ -28,7 +28,28 @@
 
             <!-- Content box -->
             <div class="contentBox">
-                Hello World!
+                <!-- Displaying all items as item boxes -->
+                <c:forEach var="item" items="${items}">
+                    <div class="itemBox">
+                        <div class="itemImageBox">
+                            <img src="itemimage?id=${item.avatar.id}" class="itemImage"/>
+                        </div>
+
+                        <div class="itemNameBox">
+                            ${item.name}
+                        </div>
+
+                        <div class="itemPriceBox">
+                            <b>Giá: </b> ${item.price}
+                        </div>
+
+                        <div class="viewItemBox">
+                            <a href="itemmanagement?id=${item.id}" class="viewItemUrl">
+                                Xem sản phẩm
+                            </a>
+                        </div>
+                    </div>
+                </c:forEach>
             </div>
 
         </div>
