@@ -16,28 +16,28 @@
                     Chi tiết sản phẩm
                 </c:when>
             </c:choose>
-
-            <!-- CSS Inclusion -->
-            <jsp:include page="css_inclusion/general.xml"/>
-
-            <!-- Styles inclusion -->
-
-            <!-- CSS files linking -->
-            <link rel="stylesheet" href="./css/formpage.css"/>
-            <link rel="stylesheet" href="./css/itemmanagement.css"/>
         </title>
 
-        <body>
-            <!-- Header -->
-            <jsp:include page="header.jsp"/>
+        <!-- CSS Inclusion -->
+        <jsp:include page="css_inclusion/general.xml"/>
 
-            <!-- Body -->
-            <div class="body">
-                Hello World!
-            </div>
+        <!-- Styles inclusion -->
 
-            <!-- Footer -->
-            <jsp:include page="footer.jsp"/>
-        </body>
+        <!-- CSS files linking -->
+        <link rel="stylesheet" href="./css/formpage.css"/>
+        <link rel="stylesheet" href="./css/itemmanagement.css"/>
     </head>
+
+    <body>
+        <!-- Header -->
+        <jsp:include page="header.jsp"/>
+
+        <!-- Body -->
+        <div class="body">
+            Hello World!
+        </div>
+
+        <!-- Footer -->
+        <jsp:include page="footer.jsp"/>
+    </body>
 </html>
