@@ -16,6 +16,7 @@
 
         <!-- CSS files linking -->
         <link rel="stylesheet" href="./css/formpage.css"/>
+        <link rel="stylesheet" href="./css/itemsmanagement.css"/>
     </head>
 
     <body>
