@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity (name = "Item")
@@ -30,6 +31,10 @@ public class Item {
     @ManyToOne (fetch = FetchType.EAGER)
     @JoinColumn (name = "itemTypeId", referencedColumnName = "id")
     private ItemType type;
+
+    @OneToOne (fetch = FetchType.EAGER)
+    @JoinColumn (name = "avatar", referencedColumnName = "id", nullable = true)
+    private ItemImage avatar;
 
     @OneToMany (fetch = FetchType.EAGER, mappedBy = "item")
     private Set<ItemImage> images;
