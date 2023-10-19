@@ -24,8 +24,7 @@ public class ItemType {
     private Set<Item> items;
 
     // CONSTRUCTORS:
-    public ItemType(Set<Item> items) {
-        this.items = items;
+    public ItemType() {
     }
     public ItemType(String id, String name, Set<Item> items) {
         this.id = id;
