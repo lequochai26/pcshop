@@ -91,8 +91,7 @@ public class ItemTypeManagementServlet extends AdministratorServlet {
                     "message",
                     "Loại sản phẩm này không tồn tại! Vui lòng thử lại!"
                 );
-                request.setAttribute("color", "red");
-                request.getRequestDispatcher("message").forward(request, response);
+                super.doGet(request, response);
                 return;
             }
 
