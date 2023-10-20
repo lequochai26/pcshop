@@ -107,7 +107,23 @@ public class ItemTypeManagementServlet extends AdministratorServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Get action parameter
+        String action = request.getParameter("action");
+
+        // Get endpoint from action parameter
+        String endpoint = null;
+        if (action.equals("new")) {
+            endpoint = "newitemtype";
+        }
+        else {
+            endpoint = "edititemtype";
+        }
+
+        // Get request dispatcher
+        RequestDispatcher dispatcher = request.getRequestDispatcher(endpoint);
+
+        // Forward
+        dispatcher.forward(request, response);
     }
 }
