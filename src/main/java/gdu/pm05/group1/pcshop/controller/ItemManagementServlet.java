@@ -94,6 +94,17 @@ public class ItemManagementServlet extends AdministratorServlet {
                 new HQLParameter("id", id)
             );
 
+            // Item null case
+            if (item == null) {
+                // Show message
+                this.showMessage(
+                    request, response,
+                    "Vật phẩm không tồn tại!",
+                    "red"
+                );
+                return;
+            }
+
             // Set item as an attribute to request
             request.setAttribute("item", item);
         }
