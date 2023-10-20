@@ -31,6 +31,14 @@ public class EditItemTypeServlet extends ItemTypeManagementServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // Validation
+        boolean valid = this.validateAdministrator(request, response);
+
+        // Exit if not valid
+        if (!valid) {
+            return;
+        }
+
         // Get necessary parameters
         String id = request.getParameter("id");
         String name = request.getParameter("name");
