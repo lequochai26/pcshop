@@ -90,6 +90,17 @@
                                 </c:if>
                             </td>
                         </tr>
+
+                        <!-- Message row -->
+                        <c:if test="${not empty message}">
+                            <tr>
+                                <td colspan="2">
+                                    <p style="color: red;">
+                                        ${message}
+                                    </p>
+                                </td>
+                            </tr>
+                        </c:if>
                     </table>
                 </form>
 
