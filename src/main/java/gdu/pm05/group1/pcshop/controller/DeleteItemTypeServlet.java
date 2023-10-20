@@ -22,10 +22,7 @@ public class DeleteItemTypeServlet extends AdministratorServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // METHOD NOT ALLOWED
-        response.setStatus(
-            HttpServletResponse.SC_METHOD_NOT_ALLOWED
-        );
+        this.doPost(request, response);
     }
 
     @Override
