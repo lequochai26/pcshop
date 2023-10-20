@@ -61,7 +61,7 @@
                                 </td>
 
                                 <td>
-                                    <input type="text" id="id" name="id" class="textbox"/>
+                                    <input type="text" id="id" name="id" class="textbox" required/>
                                 </td>
                             </tr>
                         </c:if>
@@ -75,7 +75,7 @@
                             </td>
 
                             <td>
-                                <input type="text" id="name" name="name" value="${type.name}" class="textbox"/>
+                                <input type="text" id="name" name="name" value="${type.name}" class="textbox" required/>
                             </td>
                         </tr>
 
