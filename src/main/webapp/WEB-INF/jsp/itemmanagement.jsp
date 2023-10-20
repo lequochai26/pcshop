@@ -106,7 +106,7 @@
                             </td>
 
                             <td>
-                                <textarea id="description" name="description" class="areabox" style="font-size: 18px;" required>${item.description}</textarea>
+                                <textarea id="description" name="description" class="areabox" style="font-size: 18px;" maxlength="1000" required>${item.description}</textarea>
                             </td>
                         </tr>
 
