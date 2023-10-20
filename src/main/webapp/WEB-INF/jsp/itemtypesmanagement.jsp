@@ -29,7 +29,23 @@
             
             <!-- Content box -->
             <div class="contentBox">
-                Hello World!
+                
+                <!-- New item type area -->
+                <div style="margin-bottom: 25px;">
+                    <a href="itemtypemanagement?action=new" class="button" style="font-size: 18px;">
+                        Thêm mới
+                    </a>
+                </div>
+
+                <!-- Item types displaying area -->
+                <div>
+                    <c:forEach var="type" items="${types}">
+                        <a href="itemtypemanagement?action=detail&id=${type.detail}" class="button">
+                            ${type.id} - ${type.name}
+                        </a>
+                    </c:forEach>
+                </div>
+
             </div>
 
         </div>
