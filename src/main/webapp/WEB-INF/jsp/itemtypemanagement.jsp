@@ -82,7 +82,7 @@
                         <!-- Action row -->
                         <tr>
                             <td colspan="2">
-                                <input type="submit" value="Lưu"/>
+                                <input type="submit" value="Lưu" class="button"/>
                                 <c:if test="${not empty type}">
                                     <a href="deleteitem?id=${type.id}" class="button">
                                         Xóa
