@@ -11,7 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet (name = "newitem", urlPatterns = "/newitem")
+@WebServlet (name = "newitemtype", urlPatterns = "/newitemtype")
 public class NewItemTypeServlet extends ItemTypeManagementServlet {
     // CONSTRUCTORS:
     public NewItemTypeServlet() {
