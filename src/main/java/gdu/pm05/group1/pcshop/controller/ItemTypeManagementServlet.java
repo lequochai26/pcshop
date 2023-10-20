@@ -101,7 +101,7 @@ public class ItemTypeManagementServlet extends AdministratorServlet {
         }
 
         // Get dispatcher
-        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/itemmanagement.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/itemtypemanagement.jsp");
 
         // Forward
         dispatcher.forward(request, response);
