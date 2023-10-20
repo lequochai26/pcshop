@@ -32,7 +32,10 @@ public class NewItemServlet extends ItemManagementServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        this.doPost(request, response);
+        // Method not allowed
+        response.setStatus(
+            HttpServletResponse.SC_METHOD_NOT_ALLOWED
+        );
     }
 
     @Override
