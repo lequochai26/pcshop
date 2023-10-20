@@ -18,6 +18,14 @@
 
         <!-- CSS Files linking -->
         <link rel="stylesheet" href="./css/formpage.css"/>
+
+        <!-- Custom style declaration -->
+        <style>
+            a.button[isTypeButton="true"] {
+                /* Margin */
+                margin: 10px;
+            }
+        </style>
     </head>
 
     <body>
@@ -40,7 +48,7 @@
                 <!-- Item types displaying area -->
                 <div>
                     <c:forEach var="type" items="${types}">
-                        <a href="itemtypemanagement?action=detail&id=${type.detail}" class="button">
+                        <a href="itemtypemanagement?action=detail&id=${type.id}" class="button" isTypeButton="true">
                             ${type.id} - ${type.name}
                         </a>
                     </c:forEach>
