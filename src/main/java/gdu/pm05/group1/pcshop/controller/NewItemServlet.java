@@ -12,7 +12,6 @@ import gdu.pm05.group1.pcshop.model.ItemImage;
 import gdu.pm05.group1.pcshop.model.ItemType;
 import gdu.pm05.group1.pcshop.model.dbhandler.HQLParameter;
 import gdu.pm05.group1.pcshop.model.dbhandler.IDBHandler;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -95,6 +94,22 @@ public class NewItemServlet extends ItemManagementServlet {
             return;
         }
 
+        // Get item type
+        ItemType type = dbHandler.get(
+            ItemType.class,
+            new HQLParameter("id", typeId)
+        );
+
+        // Type not exist case
+        if (type == null) {
+            request.setAttribute(
+                "message",
+                "Loại sản phẩm này không còn tồn tại! Vui lòng thử lại!"
+            );
+            super.doGet(request, response);
+            return;
+        }
+
         // Create new Item
         item = new Item();
 
@@ -103,12 +118,6 @@ public class NewItemServlet extends ItemManagementServlet {
 
         // Create a list of ItemImage named images
         Set<ItemImage> images = new HashSet<>();
-
-        // Get item type
-        ItemType type = dbHandler.get(
-            ItemType.class,
-            new HQLParameter("id", typeId)
-        );
 
         // Item properties assigning
         item.setId(id);
