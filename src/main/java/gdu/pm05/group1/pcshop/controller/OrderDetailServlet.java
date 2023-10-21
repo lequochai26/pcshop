@@ -1,8 +1,13 @@
 package gdu.pm05.group1.pcshop.controller;
 
 import java.io.IOException;
+import java.util.Map;
 
+import gdu.pm05.group1.pcshop.controller.util.ServletUtil;
+import gdu.pm05.group1.pcshop.controller.util.enums.AdministratorValidationResult;
+import gdu.pm05.group1.pcshop.controller.util.enums.UserValidationResult;
 import gdu.pm05.group1.pcshop.model.Order;
+import gdu.pm05.group1.pcshop.model.User;
 import gdu.pm05.group1.pcshop.model.dbhandler.HQLParameter;
 import gdu.pm05.group1.pcshop.model.dbhandler.IDBHandler;
 import jakarta.servlet.RequestDispatcher;
@@ -28,12 +33,11 @@ public class OrderDetailServlet extends HttpServlet {
 
         // ID Null case
         if (idStr == null) {
-            request.setAttribute(
-                "message",
-                "Không đủ thông tin truy cập! Vui lòng thử lại!"
+            ServletUtil.showMessage(
+                request, response,
+                "Không đủ thông tin yêu cầu, vui lòng thử lại!",
+                "red"
             );
-            request.setAttribute("color", "red");
-            request.getRequestDispatcher("message").forward(request, response);
             return;
         }
 
@@ -43,12 +47,11 @@ public class OrderDetailServlet extends HttpServlet {
             id = Integer.parseInt(idStr);
         }
         catch (Exception e) {
-            request.setAttribute(
-                "message",
-                e.toString()
+            ServletUtil.showMessage(
+                request, response,
+                "Thông tin không hợp lệ, vui lòng thử lại!",
+                "red"
             );
-            request.setAttribute("color", "red");
-            request.getRequestDispatcher("message").forward(request, response);
             return;
         }
 
@@ -66,17 +69,52 @@ public class OrderDetailServlet extends HttpServlet {
 
         // Order not exist case
         if (order == null) {
-            request.setAttribute(
-                "message",
-                "Đơn hàng không tồn tại! Vui lòng thử lại!"
+            ServletUtil.showMessage(
+                request, response,
+                "Đơn hàng không tồn tại, vui lòng thử lại!",
+                "red"
             );
-            request.setAttribute("color", "red");
-            request.getRequestDispatcher("message").forward(request, response);
             return;
+        }
+
+        // User, Administrator validate
+        Map<String, Object> path = ServletUtil.administratorValidate(request, response);
+
+        // Get user validate result from path
+        UserValidationResult userValidateResult = (UserValidationResult)path.get("userValidateResult");
+
+        // Check user validate result
+        // User validate failed case
+        if (userValidateResult != UserValidationResult.SUCCESSFULLY) {
+            ServletUtil.showMessage(
+                request, response,
+                "Vui lòng đăng nhập trước khi truy cập vào trang này!"
+            );
+            return;
+        }
+
+        // User validate successfully case
+        // Retrieve user from path
+        User user = (User)path.get("user");
+
+        // Request user not order's user case
+        if (!order.getUser().getUsername().equals(user.getUsername())) {
+            // User not administrator case
+            AdministratorValidationResult administratorValidateResult = (AdministratorValidationResult)path.get("administratorValidateResult");
+            if (administratorValidateResult != AdministratorValidationResult.IS_ADMINISTRATOR) {
+                ServletUtil.showMessage(
+                    request, response,
+                    "Bạn không có quyền truy cập vào trang này!"
+                );
+                return;
+            }
         }
 
         // Set order attribute for request
         request.setAttribute("order", order);
+
+        // Set user attribute for request
+        request.setAttribute("user", user);
 
         // Get dispatcher
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/orderdetail.jsp");
