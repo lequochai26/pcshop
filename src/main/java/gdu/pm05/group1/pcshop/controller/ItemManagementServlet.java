@@ -3,7 +3,7 @@ package gdu.pm05.group1.pcshop.controller;
 import java.io.IOException;
 import java.util.List;
 
-import gdu.pm05.group1.pcshop.controller.util.MultipartUtil;
+import gdu.pm05.group1.pcshop.controller.util.ServletUtil;
 import gdu.pm05.group1.pcshop.model.Item;
 import gdu.pm05.group1.pcshop.model.ItemType;
 import gdu.pm05.group1.pcshop.model.dbhandler.HQLParameter;
@@ -127,7 +127,7 @@ public class ItemManagementServlet extends AdministratorServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Get action parameter
-        String action = MultipartUtil.readPartAsString(
+        String action = ServletUtil.readPartAsString(
             request.getPart("action")
         );
 

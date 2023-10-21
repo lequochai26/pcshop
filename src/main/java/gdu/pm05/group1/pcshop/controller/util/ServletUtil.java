@@ -5,7 +5,7 @@ import java.io.InputStream;
 
 import jakarta.servlet.http.Part;
 
-public class MultipartUtil {
+public class ServletUtil {
     // STATIC METHODS:
     public static String readPartAsString(Part part) {
         // Read part as bytes
@@ -42,7 +42,7 @@ public class MultipartUtil {
     }
 
     // CONSTRUCTORS:
-    private MultipartUtil() {
+    private ServletUtil() {
 
     }
 }

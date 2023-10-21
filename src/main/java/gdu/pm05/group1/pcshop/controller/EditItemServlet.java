@@ -3,7 +3,7 @@ package gdu.pm05.group1.pcshop.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import gdu.pm05.group1.pcshop.controller.util.MultipartUtil;
+import gdu.pm05.group1.pcshop.controller.util.ServletUtil;
 import gdu.pm05.group1.pcshop.model.Item;
 import gdu.pm05.group1.pcshop.model.ItemImage;
 import gdu.pm05.group1.pcshop.model.ItemType;
@@ -51,22 +51,22 @@ public class EditItemServlet extends ItemManagementServlet {
         Part isEditImagesPart = request.getPart("isEditImages");
 
         // Get parameters from request
-        String id = MultipartUtil.readPartAsString(
+        String id = ServletUtil.readPartAsString(
             request.getPart("id")
         );
-        String name = MultipartUtil.readPartAsString(
+        String name = ServletUtil.readPartAsString(
             request.getPart("name")
         );
-        String priceStr = MultipartUtil.readPartAsString(
+        String priceStr = ServletUtil.readPartAsString(
             request.getPart("price")
         );
-        String amountStr = MultipartUtil.readPartAsString(
+        String amountStr = ServletUtil.readPartAsString(
             request.getPart("amount")
         );
-        String description = MultipartUtil.readPartAsString(
+        String description = ServletUtil.readPartAsString(
             request.getPart("description")
         );
-        String typeId = MultipartUtil.readPartAsString(
+        String typeId = ServletUtil.readPartAsString(
             request.getPart("type")
         );
 
@@ -89,10 +89,10 @@ public class EditItemServlet extends ItemManagementServlet {
 
         // Keep processing input values
         if (avatarPart != null) {
-            avatarByte = MultipartUtil.readPartAsBytes(avatarPart);
+            avatarByte = ServletUtil.readPartAsBytes(avatarPart);
         }
         for (Part imagesPart : imagesParts) {
-            byte[] imagesByte = MultipartUtil.readPartAsBytes(imagesPart);
+            byte[] imagesByte = ServletUtil.readPartAsBytes(imagesPart);
             if (imagesByte.length > 0) {
                 imagesBytes.add(imagesByte);
             }

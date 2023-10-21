@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import gdu.pm05.group1.pcshop.controller.util.MultipartUtil;
+import gdu.pm05.group1.pcshop.controller.util.ServletUtil;
 import gdu.pm05.group1.pcshop.model.Item;
 import gdu.pm05.group1.pcshop.model.ItemImage;
 import gdu.pm05.group1.pcshop.model.ItemType;
@@ -64,19 +64,19 @@ public class NewItemServlet extends ItemManagementServlet {
         }
         
         // Get parameters from parts
-        String id = MultipartUtil.readPartAsString(idPart);
-        String name = MultipartUtil.readPartAsString(namePart);
-        String priceStr = MultipartUtil.readPartAsString(pricePart);
+        String id = ServletUtil.readPartAsString(idPart);
+        String name = ServletUtil.readPartAsString(namePart);
+        String priceStr = ServletUtil.readPartAsString(pricePart);
         double price = Double.parseDouble(priceStr);
-        String amountStr = MultipartUtil.readPartAsString(amountPart);
+        String amountStr = ServletUtil.readPartAsString(amountPart);
         int amount = Integer.parseInt(amountStr);
-        String description = MultipartUtil.readPartAsString(descriptionPart);
-        String typeId = MultipartUtil.readPartAsString(typePart);
-        byte[] avatarByte = MultipartUtil.readPartAsBytes(avatarPart);
+        String description = ServletUtil.readPartAsString(descriptionPart);
+        String typeId = ServletUtil.readPartAsString(typePart);
+        byte[] avatarByte = ServletUtil.readPartAsBytes(avatarPart);
         List<byte[]> imagesBytes = new ArrayList<>();
         for (Part imagesPart : imagesParts) {
             imagesBytes.add(
-                MultipartUtil.readPartAsBytes(imagesPart)
+                ServletUtil.readPartAsBytes(imagesPart)
             );
         }
 
