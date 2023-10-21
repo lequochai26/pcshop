@@ -90,14 +90,7 @@ public class ServletUtil {
         HttpServletRequest request,
         HttpServletResponse response
     ) {
-        // Path initialization
-        Map<String, Object> path = new HashMap<>();
-
-        // User validate
-        userValidate(request, response, path);
-
-        // Return path
-        return path;
+        return userValidate(request, response, true);
     }
 
     /**
