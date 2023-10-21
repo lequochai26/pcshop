@@ -39,7 +39,7 @@
                 <!-- User form -->
                 <form action="usermanagement" method="post">
                     <!-- Hidden inputs -->
-                    <input value="${param.action}" hidden/>
+                    <input id="action" name="action" value="${param.action}" hidden/>
                     <c:if test="${not empty requestScope.user}">
                         <input id="username" name="username" value="${requestScope.user.username}" hidden/>
                     </c:if>
