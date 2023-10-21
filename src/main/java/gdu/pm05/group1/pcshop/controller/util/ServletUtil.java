@@ -16,6 +16,12 @@ import jakarta.servlet.http.Part;
 
 public class ServletUtil {
     // STATIC METHODS:
+    /**
+     * 
+     * @param request Servlet request
+     * @param response Servlet response
+     * @return Path stores all objects and results during validation processing.
+     */
     public static Map<String, Object> userValidate(
         HttpServletRequest request,
         HttpServletResponse response
@@ -30,6 +36,13 @@ public class ServletUtil {
         return path;
     }
 
+    /**
+     * 
+     * @param request Servlet request
+     * @param response Servlet response
+     * @param logout Logout if already logged-in but not valid
+     * @return Path stores all objects and results during validation processing. 
+     */
     public static Map<String, Object> userValidate(
         HttpServletRequest request,
         HttpServletResponse response,
@@ -45,6 +58,12 @@ public class ServletUtil {
         return path;
     }
 
+    /**
+     * 
+     * @param request Servlet request
+     * @param response Servlet response
+     * @param path Path stores all objects and results during validation processing. 
+     */
     public static void userValidate(
         HttpServletRequest request,
         HttpServletResponse response,
@@ -53,6 +72,13 @@ public class ServletUtil {
         userValidate(request, response, false, path);
     }
 
+    /**
+     * 
+     * @param request Servlet request
+     * @param response Servlet response
+     * @param logout Logout if already logged-in but not valid
+     * @param path Path stores all objects and results during validation processing. 
+     */
     public static void userValidate(
         HttpServletRequest request,
         HttpServletResponse response,
