@@ -9,10 +9,10 @@
     <head>
         <!-- Title -->
         <title>
-            <c:if test="${not empty user}">
-                user.username
+            <c:if test="${not empty requestScope.user}">
+                ${requestScope.user.username}
             </c:if>
-            <c:if test="${empty user}">
+            <c:if test="${empty requestScope.user}">
                 Thêm người dùng
             </c:if>
         </title>
@@ -25,14 +25,6 @@
 
         <!-- CSS Files linking -->
         <link rel="stylesheet" href="./css/formpage.css"/>
-
-        <!-- Custom styles definition -->
-        <style>
-            .radioselector[value="Female"]:checked + label::before {
-                /* Background */
-                background-color: fuchsia;
-            }
-        </style>
     </head>
 
     <body>
@@ -110,7 +102,7 @@
                                     <c:if test="${requestScope.user.userInfo.gender == 'true'}">
                                         <input type="radio" id="maleRadioSelector" name="gender" value="Male" class="radioselector" checked/>
                                     </c:if>
-                                    <c:if test="${requestScope.userInfo.gender != 'true'}">
+                                    <c:if test="${requestScope.user.userInfo.gender != 'true'}">
                                         <input type="radio" id="maleRadioSelector" name="gender" value="Male" class="radioselector"/>
                                     </c:if>
                                 </c:if>
@@ -118,7 +110,9 @@
                                     <input type="radio" id="maleRadioSelector" name="gender" value="Male" class="radioselector" checked/>
                                 </c:if>
 
-                                <label for="maleRadioSelector" class="label">Nam</label>
+                                <label for="maleRadioSelector" class="label">
+                                    Nam
+                                </label>
 
                                 <c:if test="${not empty requestScope.user}">
                                     <c:if test="${requestScope.user.userInfo.gender == 'false'}">
@@ -132,7 +126,9 @@
                                     <input type="radio" id="femaleRadioSelector" name="gender" value="Female" class="radioselector"/>
                                 </c:if>
 
-                                <label for="femaleRadioSelector" class="label">Nữ</label>
+                                <label for="femaleRadioSelector" class="label">
+                                    Nữ
+                                </label>
                             </td>
                         </tr>
 
@@ -166,7 +162,7 @@
                         <tr>
                             <td colspan="2">
                                 <input type="submit" value="Lưu" class="button"/>
-                                <c:if test="${not empty user}">
+                                <c:if test="${not empty requestScope.user}">
                                     <a href="deleteuser?username=${requestScope.user.username}" class="button">
                                         Xóa
                                     </a>
