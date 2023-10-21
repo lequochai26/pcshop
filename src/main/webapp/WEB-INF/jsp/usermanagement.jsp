@@ -25,6 +25,14 @@
 
         <!-- CSS Files linking -->
         <link rel="stylesheet" href="./css/formpage.css"/>
+
+        <!-- Custom styles definition -->
+        <style>
+            .radioselector[value="Female"]:checked + label::before {
+                /* Background */
+                background-color: fuchsia;
+            }
+        </style>
     </head>
 
     <body>
