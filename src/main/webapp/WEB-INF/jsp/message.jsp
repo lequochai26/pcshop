@@ -16,9 +16,13 @@
         <!-- CSS Inclusion -->
         <jsp:include page="css_inclusion/general.xml"/>
 
+        <!-- Styles inclusion -->
+        <jsp:include page="styles/general.jsp"/>
+
         <!-- CSS Files linking -->
         <link rel="stylesheet" href="./css/formpage.css"/>
 
+        <!-- Custom styles definition -->
         <style>
             .contentBox p {
                 /* Font */
