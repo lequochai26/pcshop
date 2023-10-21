@@ -99,6 +99,22 @@
                             </td>
                         </tr>
 
+                        <!-- Amount row -->
+                        <tr>
+                            <td>
+                                <label for="amount" class="label">Số lượng:</label>
+                            </td>
+
+                            <td>
+                                <c:if test="${not empty item}">
+                                    <input type="number" id="amount" name="amount" value="${item.amount}" class="textbox" required/>
+                                </c:if>
+                                <c:if test="${empty item}">
+                                    <input type="number" id="amount" name="amount" value="0" class="textbox" required/>
+                                </c:if>
+                            </td>
+                        </tr>
+
                         <!-- Description row -->
                         <tr>
                             <td class="labelCol">
