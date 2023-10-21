@@ -52,6 +52,7 @@ public class NewItemServlet extends ItemManagementServlet {
         Part idPart = request.getPart("id");
         Part namePart = request.getPart("name");
         Part pricePart = request.getPart("price");
+        Part amountPart = request.getPart("amountPart");
         Part descriptionPart = request.getPart("description");
         Part typePart = request.getPart("type");
         Part avatarPart = request.getPart("avatar");
@@ -67,6 +68,8 @@ public class NewItemServlet extends ItemManagementServlet {
         String name = MultipartUtil.readPartAsString(namePart);
         String priceStr = MultipartUtil.readPartAsString(pricePart);
         double price = Double.parseDouble(priceStr);
+        String amountStr = MultipartUtil.readPartAsString(amountPart);
+        int amount = Integer.parseInt(amountStr);
         String description = MultipartUtil.readPartAsString(descriptionPart);
         String typeId = MultipartUtil.readPartAsString(typePart);
         byte[] avatarByte = MultipartUtil.readPartAsBytes(avatarPart);
@@ -126,6 +129,7 @@ public class NewItemServlet extends ItemManagementServlet {
         item.setId(id);
         item.setName(name);
         item.setPrice(price);
+        item.setAmount(amount);
         item.setDescription(description);
         item.setType(type);
         item.setAvatar(avatar);
