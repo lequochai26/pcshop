@@ -174,7 +174,7 @@
                         <c:if test="${not empty message}">
                             <tr>
                                 <td colspan="2">
-                                    <p class="label" style="color: red;">
+                                    <p style="color: red;">
                                         ${message}
                                     </p>
                                 </td>
