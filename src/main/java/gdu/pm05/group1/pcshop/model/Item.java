@@ -28,6 +28,9 @@ public class Item {
     @Column (name = "price", nullable = false)
     private double price;
 
+    @Column (name = "amount", nullable = false)
+    private int amount;
+
     @ManyToOne (fetch = FetchType.EAGER)
     @JoinColumn (name = "itemTypeId", referencedColumnName = "id")
     private ItemType type;
@@ -49,12 +52,13 @@ public class Item {
     public Item() {
     }
 
-    public Item(String id, String name, String description, double price, ItemType type, ItemImage avatar,
+    public Item(String id, String name, String description, double price, int amount, ItemType type, ItemImage avatar,
             Set<ItemImage> images, Set<CartItem> carts, Set<OrderItem> orders) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
+        this.amount = amount;
         this.type = type;
         this.avatar = avatar;
         this.images = images;
@@ -118,5 +122,11 @@ public class Item {
     }
     public void setAvatar(ItemImage avatar) {
         this.avatar = avatar;
+    }
+    public int getAmount() {
+        return amount;
+    }
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 }
