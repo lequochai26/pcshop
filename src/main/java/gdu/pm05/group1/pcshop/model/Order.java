@@ -1,5 +1,6 @@
 package gdu.pm05.group1.pcshop.model;
 
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -24,6 +25,9 @@ public class Order {
     @Column (name = "id")
     private int id;
 
+    @Column (name = "date", nullable = false)
+    private Date date;
+
     @Column (name = "totalPrice", nullable = false)
     private double totalPrice;
 
@@ -41,8 +45,9 @@ public class Order {
     public Order() {
     }
 
-    public Order(int id, double totalPrice, OrderStatus status, Set<OrderItem> items, User user) {
+    public Order(int id, Date date, double totalPrice, OrderStatus status, Set<OrderItem> items, User user) {
         this.id = id;
+        this.date = date;
         this.totalPrice = totalPrice;
         this.status = status;
         this.items = items;
@@ -79,5 +84,11 @@ public class Order {
     }
     public void setUser(User user) {
         this.user = user;
+    }
+    public Date getDate() {
+        return date;
+    }
+    public void setDate(Date date) {
+        this.date = date;
     }
 }
