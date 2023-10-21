@@ -93,7 +93,7 @@
                             </td>
 
                             <td>
-                                <input type="text" id="fullName" name="fullName" value="${requestScope.userInfo.fullName}" class="textbox"/>
+                                <input type="text" id="fullName" name="fullName" value="${requestScope.user.userInfo.fullName}" class="textbox"/>
                             </td>
                         </tr>
 
@@ -107,10 +107,10 @@
 
                             <td>
                                 <c:if test="${not empty requestScope.user}">
-                                    <c:if test="${requestScope.user.userInfo.gender}">
+                                    <c:if test="${requestScope.user.userInfo.gender == 'true'}">
                                         <input type="radio" id="maleRadioSelector" name="gender" value="Male" class="radioselector" checked/>
                                     </c:if>
-                                    <c:if test="${not requestScope.userInfo.gender}">
+                                    <c:if test="${requestScope.userInfo.gender != 'true'}">
                                         <input type="radio" id="maleRadioSelector" name="gender" value="Male" class="radioselector"/>
                                     </c:if>
                                 </c:if>
@@ -121,10 +121,10 @@
                                 <label for="maleRadioSelector" class="label">Nam</label>
 
                                 <c:if test="${not empty requestScope.user}">
-                                    <c:if test="${not requestScope.user.userInfo.gender}">
+                                    <c:if test="${requestScope.user.userInfo.gender == 'false'}">
                                         <input type="radio" id="femaleRadioSelector" name="gender" value="Female" class="radioselector" checked/>
                                     </c:if>
-                                    <c:if test="${requestScope.user.userInfo.gender}">
+                                    <c:if test="${requestScope.user.userInfo.gender != 'false'}">
                                         <input type="radio" id="femaleRadioSelector" name="gender" value="Female" class="radioselector"/>
                                     </c:if>
                                 </c:if>
