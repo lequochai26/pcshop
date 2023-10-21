@@ -18,6 +18,17 @@
 
         <!-- CSS files linking -->
         <link rel="stylesheet" href="./css/formpage.css"/>
+
+        <!-- Custom styles definition -->
+        <style>
+            a.button {
+                /* Font/text */
+                font-size: 18px;
+
+                /* Padding */
+                padding: 5px;
+            }
+        </style>
     </head>
 
     <body>
@@ -29,7 +40,63 @@
 
             <!-- Content box -->
             <div class="contentBox">
-                Hello World!
+                <!-- New users area -->
+                <div style="margin-bottom: 25px;">
+                    <a href="usermanagement?action=new" class="button">
+                        Thêm người dùng
+                    </a>
+                </div>
+
+                <!-- All users displaying area -->
+                <div>
+                    <!-- Users table -->
+                    <table cellspacing="10" style="font-family: Arial; font-size: 18px;">
+                        <!-- Heading row -->
+                        <tr>
+                            <th>
+                                Tên người dùng
+                            </th>
+
+                            <th>
+                                Họ và tên
+                            </th>
+
+                            <th>
+                                Số điện thoại
+                            </th>
+
+                            <th colspan="2">
+                                Hành động
+                            </th>
+                        </tr>
+
+                        <!-- Displaying all users -->
+                        <c:forEach var="user" items="${users}">
+                            <tr>
+                                <td>
+                                    ${user.username}
+                                </td>
+
+                                <td>
+                                    ${user.userInfo.fullName}
+                                </td>
+
+                                <td>
+                                    ${user.userInfo.phoneNumbers}
+                                </td>
+
+                                <td colspan="2">
+                                    <a href="usermanagement?action=detail&username=${user.username}" class="button">
+                                        Xem thông tin
+                                    </a>
+                                    <a href="deleteuser?username=${user.username}" class="button">
+                                        Xóa
+                                    </a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </div>
             </div>
 
         </div>
