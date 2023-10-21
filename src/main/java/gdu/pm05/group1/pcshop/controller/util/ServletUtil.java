@@ -10,7 +10,9 @@ import gdu.pm05.group1.pcshop.controller.util.enums.UserValidationResult;
 import gdu.pm05.group1.pcshop.model.User;
 import gdu.pm05.group1.pcshop.model.dbhandler.IDBHandler;
 import gdu.pm05.group1.pcshop.model.enums.UserPermission;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -18,6 +20,48 @@ import jakarta.servlet.http.Part;
 
 public class ServletUtil {
     // STATIC METHODS:
+    public static void showMessage(
+        HttpServletRequest request,
+        HttpServletResponse response,
+        String message,
+        String color
+    ) throws ServletException, IOException {
+        // Show message
+        showMessage(request, response, message, color, "");
+    }
+
+    public static void showMessage(
+        HttpServletRequest request,
+        HttpServletResponse response,
+        String message,
+        String color,
+        String style
+    ) throws ServletException, IOException {
+        // Show message
+        showMessage(request, response, message, color, style, "message");
+    }
+
+    public static void showMessage(
+        HttpServletRequest request,
+        HttpServletResponse response,
+        String message,
+        String color,
+        String style,
+        String forwardTo
+    ) throws ServletException, IOException {
+        // Set message attribute for request
+        request.setAttribute("message", message);
+
+        // Set color attribute for request
+        request.setAttribute("color", color);
+
+        // Get request dispatcher
+        RequestDispatcher dispatcher = request.getRequestDispatcher(forwardTo);
+
+        // Forward
+        dispatcher.forward(request, response);
+    }
+
     public static Map<String, Object> administratorValidate(
         HttpServletRequest request,
         HttpServletResponse response
