@@ -60,6 +60,9 @@ public class EditItemServlet extends ItemManagementServlet {
         String priceStr = MultipartUtil.readPartAsString(
             request.getPart("price")
         );
+        String amountStr = MultipartUtil.readPartAsString(
+            request.getPart("amount")
+        );
         String description = MultipartUtil.readPartAsString(
             request.getPart("description")
         );
@@ -69,6 +72,7 @@ public class EditItemServlet extends ItemManagementServlet {
 
         // Input processing
         double price = Double.parseDouble(priceStr);
+        int amount = Integer.parseInt(amountStr);
         boolean isEditAvatar = (isEditAvatarPart != null);
         boolean isEditImages = (isEditImagesPart != null);
         byte[] avatarByte = null;
@@ -135,6 +139,7 @@ public class EditItemServlet extends ItemManagementServlet {
         // Assigning new values for item
         item.setName(name);
         item.setPrice(price);
+        item.setAmount(amount);
         item.setDescription(description);
         item.setType(type);
 
