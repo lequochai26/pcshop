@@ -56,7 +56,7 @@
                                 </td>
 
                                 <td>
-                                    <input type="email" id="username" name="username" class="textbox"/>
+                                    <input type="email" id="username" name="username" class="textbox" required/>
                                 </td>
                             </tr>
                         </c:if>
@@ -71,7 +71,7 @@
                                 </td>
 
                                 <td>
-                                    <input type="password" id="password" name="password" class="textbox"/>
+                                    <input type="password" id="password" name="password" class="textbox" required/>
                                 </td>
                             </tr>
                         </c:if>
@@ -85,7 +85,7 @@
                             </td>
 
                             <td>
-                                <input type="text" id="fullName" name="fullName" value="${requestScope.user.userInfo.fullName}" class="textbox"/>
+                                <input type="text" id="fullName" name="fullName" value="${requestScope.user.userInfo.fullName}" class="textbox" required/>
                             </td>
                         </tr>
 
@@ -141,7 +141,7 @@
                             </td>
 
                             <td>
-                                <input type="text" id="phoneNumbers" name="phoneNumbers" value="${requestScope.user.userInfo.phoneNumbers}" class="textbox"/>
+                                <input type="text" id="phoneNumbers" name="phoneNumbers" value="${requestScope.user.userInfo.phoneNumbers}" class="textbox" required/>
                             </td>
                         </tr>
 
@@ -154,7 +154,7 @@
                             </td>
 
                             <td>
-                                <textarea name="address" id="address" class="areabox">${requestScope.user.userInfo.address}</textarea>
+                                <textarea name="address" id="address" class="areabox" required>${requestScope.user.userInfo.address}</textarea>
                             </td>
                         </tr>
 
