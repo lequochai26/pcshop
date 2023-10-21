@@ -101,7 +101,7 @@
 
                         <!-- Amount row -->
                         <tr>
-                            <td>
+                            <td class="labelCol">
                                 <label for="amount" class="label">Số lượng:</label>
                             </td>
 
