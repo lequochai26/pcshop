@@ -52,7 +52,7 @@ public class NewItemServlet extends ItemManagementServlet {
         Part idPart = request.getPart("id");
         Part namePart = request.getPart("name");
         Part pricePart = request.getPart("price");
-        Part amountPart = request.getPart("amountPart");
+        Part amountPart = request.getPart("amount");
         Part descriptionPart = request.getPart("description");
         Part typePart = request.getPart("type");
         Part avatarPart = request.getPart("avatar");
