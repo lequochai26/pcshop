@@ -1,6 +1,7 @@
 <!-- JSP Page Configurations -->
 <%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!-- HTML -->
 <!DOCTYPE html>
@@ -30,7 +31,49 @@
             <!-- Content box -->
             <div class="contentBox">
 
-                Hello World!
+                <!-- Display all orders table -->
+                <table cellpadding="5" style="font-family: Arial; font-size: 18px;">
+                    <!-- Heading row -->
+                    <tr>
+                        <th>
+                            Mã đơn
+                        </th>
+                        <th>
+                            Ngày lập đơn
+                        </th>
+                        <th>
+                            Thành tiền
+                        </th>
+                        <th colspan="2">
+                            Hành động
+                        </th>
+                    </tr>
+
+                    <!-- Displaying -->
+                    <c:forEach var="order" items="${orders}">
+                        <tr>
+                            <td>
+                                ${order.id}
+                            </td>
+                            <td>
+                                <fmt:formatDate var="date" scope="page" pattern="dd/MM/yyyy HH:mm:ss" value="${order.date}" />
+                                ${date}
+                            </td>
+                            <td>
+                                ${order.totalPrice}
+                            </td>
+                            <td>
+                                <a href="orderdetail?id=${order.id}" class="button">
+                                    Xem chi tiết
+                                </a>
+                                <a href="deleteorder?id=${order.id}" class="button">
+                                    Xóa
+                                </a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    <c:remove var="date"/>
+                </table>
 
             </div>
 
