@@ -14,7 +14,7 @@
         <jsp:include page="css_inclusion/general.xml"/>
 
         <!-- Styles inclusion -->
-        <jsp:include page="styles.general.jsp"/>
+        <jsp:include page="styles/general.jsp"/>
 
         <!-- CSS files linking -->
         <link rel="stylesheet" href="./css/formpage.css"/>
@@ -22,7 +22,7 @@
 
     <body>
         <!-- Header -->
-        <jsp:include page="header"/>
+        <jsp:include page="header.jsp"/>
 
         <!-- Body -->
         <div class="body">
@@ -37,6 +37,6 @@
         </div>
 
         <!-- Footer -->
-        <jsp:include page="footer"/>
+        <jsp:include page="footer.jsp"/>
     </body>
 </html>
