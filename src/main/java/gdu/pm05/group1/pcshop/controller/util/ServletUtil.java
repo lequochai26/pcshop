@@ -23,6 +23,15 @@ public class ServletUtil {
     public static void showMessage(
         HttpServletRequest request,
         HttpServletResponse response,
+        String message
+    ) throws ServletException, IOException {
+        // Show message
+        showMessage(request, response, message, "black");
+    }
+
+    public static void showMessage(
+        HttpServletRequest request,
+        HttpServletResponse response,
         String message,
         String color
     ) throws ServletException, IOException {
