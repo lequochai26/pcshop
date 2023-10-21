@@ -111,7 +111,31 @@ public class UserManagementServlet extends AdministratorServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        this.doGet(req, resp);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Administrator validation
+        boolean valid = this.validateAdministrator(request, response);
+
+        // Exit if not valid
+        if (!valid) {
+            return;
+        }
+
+        // Get action parameter
+        String action = request.getParameter("action");
+
+        // Endpoint definition
+        String endpoint = null;
+        if (action.equals("new")) {
+            endpoint = "newuser";
+        }
+        else {
+            endpoint = "edituser";
+        }
+
+        // Get request dispatcher
+        RequestDispatcher dispatcher = request.getRequestDispatcher(endpoint);
+
+        // Forward
+        dispatcher.forward(request, response);
     }
 }
