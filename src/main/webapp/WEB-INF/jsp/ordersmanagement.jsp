@@ -19,6 +19,17 @@
 
         <!-- CSS files linking -->
         <link rel="stylesheet" href="./css/formpage.css"/>
+
+        <!-- Custom styles definition -->
+        <style>
+            a.button {
+                /* Font/text */
+                font-size: 18px;
+
+                /* Padding */
+                padding: 5px;
+            }
+        </style>
     </head>
 
     <body>
