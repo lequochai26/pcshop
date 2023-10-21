@@ -40,29 +40,29 @@
                 <form action="usermanagement" method="post">
                     <!-- Hidden inputs -->
                     <input value="${param.action}" hidden/>
-                    <c:if test="${not empty user}">
-                        <input id="email" name="email" value="${user.username}" hidden/>
+                    <c:if test="${not empty requestScope.user}">
+                        <input id="username" name="username" value="${requestScope.user.username}" hidden/>
                     </c:if>
 
                     <!-- User table -->
                     <table cellpadding="5">
                         <!-- Username row -->
-                        <c:if test="${empty user}">
+                        <c:if test="${empty requestScope.user}">
                             <tr>
                                 <td>
-                                    <label for="email" class="label">
+                                    <label for="username" class="label">
                                         Email:
                                     </label>
                                 </td>
 
                                 <td>
-                                    <input type="email" id="email" name="email" class="textbox"/>
+                                    <input type="email" id="username" name="username" class="textbox"/>
                                 </td>
                             </tr>
                         </c:if>
 
                         <!-- Password row -->
-                        <c:if test="${empty user}">
+                        <c:if test="${empty requestScope.user}">
                             <tr>
                                 <td>
                                     <label for="password" class="label">
@@ -85,7 +85,7 @@
                             </td>
 
                             <td>
-                                <input type="text" id="fullName" name="fullName" value="${user.userInfo.fullName}" class="textbox"/>
+                                <input type="text" id="fullName" name="fullName" value="${requestScope.userInfo.fullName}" class="textbox"/>
                             </td>
                         </tr>
 
@@ -98,29 +98,29 @@
                             </td>
 
                             <td>
-                                <c:if test="${not empty user}">
-                                    <c:if test="${user.userInfo.gender}">
+                                <c:if test="${not empty requestScope.user}">
+                                    <c:if test="${requestScope.user.userInfo.gender}">
                                         <input type="radio" id="maleRadioSelector" name="gender" value="Male" class="radioselector" checked/>
                                     </c:if>
-                                    <c:if test="${not user.userInfo.gender}">
+                                    <c:if test="${not requestScope.userInfo.gender}">
                                         <input type="radio" id="maleRadioSelector" name="gender" value="Male" class="radioselector"/>
                                     </c:if>
                                 </c:if>
-                                <c:if test="${empty user}">
+                                <c:if test="${empty requestScope.user}">
                                     <input type="radio" id="maleRadioSelector" name="gender" value="Male" class="radioselector" checked/>
                                 </c:if>
 
                                 <label for="maleRadioSelector" class="label">Nam</label>
 
-                                <c:if test="${not empty user}">
-                                    <c:if test="${not user.userInfo.gender}">
+                                <c:if test="${not empty requestScope.user}">
+                                    <c:if test="${not requestScope.user.userInfo.gender}">
                                         <input type="radio" id="femaleRadioSelector" name="gender" value="Female" class="radioselector" checked/>
                                     </c:if>
-                                    <c:if test="${user.userInfo.gender}">
+                                    <c:if test="${requestScope.user.userInfo.gender}">
                                         <input type="radio" id="femaleRadioSelector" name="gender" value="Female" class="radioselector"/>
                                     </c:if>
                                 </c:if>
-                                <c:if test="${empty user}">
+                                <c:if test="${empty requestScope.user}">
                                     <input type="radio" id="femaleRadioSelector" name="gender" value="Female" class="radioselector"/>
                                 </c:if>
 
@@ -137,7 +137,7 @@
                             </td>
 
                             <td>
-                                <input type="text" id="phoneNumbers" name="phoneNumbers" value="${user.userInfo.phoneNumbers}" class="textbox"/>
+                                <input type="text" id="phoneNumbers" name="phoneNumbers" value="${requestScope.user.userInfo.phoneNumbers}" class="textbox"/>
                             </td>
                         </tr>
 
@@ -150,7 +150,7 @@
                             </td>
 
                             <td>
-                                <textarea name="address" id="address" class="areabox">${user.userInfo.address}</textarea>
+                                <textarea name="address" id="address" class="areabox">${requestScope.user.userInfo.address}</textarea>
                             </td>
                         </tr>
 
@@ -159,7 +159,7 @@
                             <td colspan="2">
                                 <input type="submit" value="Lưu" class="button"/>
                                 <c:if test="${not empty user}">
-                                    <a href="deleteuser?username=${user.username}" class="button">
+                                    <a href="deleteuser?username=${requestScope.user.username}" class="button">
                                         Xóa
                                     </a>
                                 </c:if>
