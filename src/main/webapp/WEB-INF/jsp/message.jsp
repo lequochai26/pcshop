@@ -39,6 +39,11 @@
                 <p style="color: ${color};">
                     ${message}
                 </p>
+                <p>
+                    <a href="home" class="button" style="font-size: 18px; padding: 5px;">
+                        Quay lại trang chủ
+                    </a>
+                </p>
             </div>
         </div>
 
