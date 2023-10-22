@@ -38,7 +38,7 @@ public class EntityMatcher {
             fieldValueStr = fieldValueStr.toLowerCase();
 
             // Return true if fieldValueStr contains content
-            if (fieldValueStr.contains(content)) {
+            if (fieldValueStr.contains(content.toLowerCase())) {
                 return true;
             }
         }
