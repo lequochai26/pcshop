@@ -55,7 +55,10 @@
                         <th>
                             Thành tiền
                         </th>
-                        <th colspan="2">
+                        <th>
+                            Trạng thái
+                        </th>
+                        <th>
                             Hành động
                         </th>
                     </tr>
@@ -74,12 +77,21 @@
                                 ${order.totalPrice}
                             </td>
                             <td>
+                                <c:forEach var="orderStatus" items="${OrderStatus}">
+                                    <c:if test="${order.status == orderStatus.value}">
+                                        ${orderStatus}
+                                    </c:if>
+                                </c:forEach>
+                            </td>
+                            <td>
                                 <a href="orderdetail?id=${order.id}" class="button">
                                     Xem chi tiết
                                 </a>
-                                <a href="deleteorder?id=${order.id}" class="button">
-                                    Xóa
-                                </a>
+                                <c:if test="${order.status == 'DELIVERED_SUCCESSFULLY' || order.status == 'CANCELLED'}">
+                                    <a href="deleteorder?id=${order.id}" class="button">
+                                        Xóa
+                                    </a>
+                                </c:if>
                             </td>
                         </tr>
                     </c:forEach>
