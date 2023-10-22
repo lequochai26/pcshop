@@ -1,7 +1,6 @@
 package gdu.pm05.group1.pcshop.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +11,6 @@ import gdu.pm05.group1.pcshop.model.Order;
 import gdu.pm05.group1.pcshop.model.User;
 import gdu.pm05.group1.pcshop.model.dbhandler.HQLParameter;
 import gdu.pm05.group1.pcshop.model.dbhandler.IDBHandler;
-import gdu.pm05.group1.pcshop.model.enums.OrderStatus;
 import gdu.pm05.group1.pcshop.model.holder.OrderStatusHolder;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletContext;
@@ -121,11 +119,15 @@ public class OrderDetailServlet extends HttpServlet {
         request.setAttribute("user", user);
 
         // Packing all order status
-        List<OrderStatusHolder> orderStatuses = new ArrayList<>();
-        orderStatuses.add(new OrderStatusHolder(OrderStatus.AWAITING_CONFIRMATION));
-        orderStatuses.add(new OrderStatusHolder(OrderStatus.CANCELLED));
-        orderStatuses.add(new OrderStatusHolder(OrderStatus.DELIVERED_SUCCESSFULLY));
-        orderStatuses.add(new OrderStatusHolder(OrderStatus.DELIVERING));
+        List<OrderStatusHolder> orderStatuses;
+        try {
+            orderStatuses = ServletUtil.getAllStatusHolders();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            ServletUtil.showMessage(request, response, e.toString(), "red");
+            return;
+        }
 
         // Add 'OrderStatus' attribute for request
         request.setAttribute("OrderStatus", orderStatuses);
