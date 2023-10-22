@@ -2,14 +2,19 @@ package gdu.pm05.group1.pcshop.controller.util;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import gdu.pm05.group1.pcshop.controller.util.enums.AdministratorValidationResult;
 import gdu.pm05.group1.pcshop.controller.util.enums.UserValidationResult;
 import gdu.pm05.group1.pcshop.model.User;
 import gdu.pm05.group1.pcshop.model.dbhandler.IDBHandler;
+import gdu.pm05.group1.pcshop.model.enums.OrderStatus;
 import gdu.pm05.group1.pcshop.model.enums.UserPermission;
+import gdu.pm05.group1.pcshop.model.holder.OrderStatusHolder;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -20,6 +25,23 @@ import jakarta.servlet.http.Part;
 
 public class ServletUtil {
     // STATIC METHODS:
+    public static List<OrderStatusHolder> getAllStatusHolders() throws IllegalArgumentException, IllegalAccessException {
+        // List initialization
+        List<OrderStatusHolder> list = new ArrayList<>();
+
+        // Getting
+        for (Field field : OrderStatus.class.getFields()) {
+            list.add(
+                new OrderStatusHolder(
+                    ((OrderStatus)field.get(null))
+                )
+            );
+        }
+
+        // Return list
+        return list;
+    }
+    
     public static void showDataNotExistMessage(
         HttpServletRequest request,
         HttpServletResponse response
