@@ -5,13 +5,17 @@
 
 <html>
     <head>
+        <!-- Title -->
         <title>PM05 Gear</title>
 
+        <!-- CSS inclusion -->
         <jsp:include page="css_inclusion/general.xml"/>
 
+        <!-- Styles inclusion -->
         <jsp:include page="styles/general.jsp"/>
 
-        <!-- <link rel="stylesheet" href="./css/homepage.css"/> -->
+        <!-- CSS files linking -->
+        <link rel="stylesheet" href="./css/homepage.css"/>
         <link rel="stylesheet" href="./css/formpage.css"/>
     </head>
 
@@ -19,39 +23,36 @@
         <!-- Header -->
         <jsp:include page="header.jsp"/>
 
+        <!-- Body -->
         <div class="body">
-            <div class="contentBox">
-                Xem sản phẩm: <select>
-                    <option>Tất cả</option>
-                    <option>Máy tính để bàn</option>
-                    <option>Máy tính xách tay</option>
-                    <option>RAM</option>
-                    <option>CPU</option>
-                    <option>Main board</option>
-                    <option>Khác</option>
-                </select>
-                <table cellspacing="5">
-                    <c:forEach var="i" begin="1" end="5">
-                        <tr>
-                            <c:forEach var="j" begin="1" end="4">
-                                <td>
-                                    <img src="./assets/item.png" style="width: 50px; height: 50px;"/>
-                                    <br/>
-                                    <p>
-                                        PC Super Fast Century
-                                    </p>
-                                    <p>
-                                        Giá: 900000
-                                    </p>
-                                    <p>
-                                        <button class="button">Xem sản phẩm</button>
-                                    </p>
-                                </td>
-                            </c:forEach>
-                        </tr>
-                    </c:forEach>
-                </table>
+
+            <!-- Type filter box -->
+            <div id="typeFilterBox" class="contentBox">
+                <form action="typesearch" method="post">
+                    <label for="id" class="label">Tìm kiếm theo loại: </label>
+                    <select id="id" name="id" class="textbox" required>
+
+                        <c:if test="${empty param.id}">
+                            <option value="" selected>Tất cả</option>
+                        </c:if>
+                        <c:if test="${not empty param.id}">
+                            <option value="">Tất cả</option>
+                        </c:if>
+
+                        <c:forEach var="type" items="${types}">
+                            <c:if test="${type.id == param.id}">
+                                <option value="${type.id}" selected>${type.name}</option>
+                            </c:if>
+                            <c:if test="${type.id != param.id}">
+                                <option value="${type.id}">${type.name}</option>
+                            </c:if>
+                        </c:forEach>
+
+                    </select>
+                    <input type="submit" class="button" value="Tìm kiếm"/>
+                </form>
             </div>
+
         </div>
 
         <!-- Footer -->
