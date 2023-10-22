@@ -1,10 +1,16 @@
 package gdu.pm05.group1.pcshop.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Map;
+import java.util.Set;
 import java.util.List;
+import java.util.ArrayList;
 
+import gdu.pm05.group1.pcshop.controller.util.ServletUtil;
+import gdu.pm05.group1.pcshop.controller.util.enums.UserValidationResult;
 import gdu.pm05.group1.pcshop.model.Notification;
+import gdu.pm05.group1.pcshop.model.User;
+import gdu.pm05.group1.pcshop.model.UserNotification;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -25,12 +31,25 @@ public class NotificationServlet extends HttpServlet {
         HttpServletRequest request,
         HttpServletResponse response
     ) throws ServletException, IOException {
-        // TESTING
-        List<Notification> notifications = new ArrayList<>();
-        Notification notification = new Notification();
-        notification.setTitle("This is a very long title prepared by Le Quoc Hai, you should view it carefully or he'll f*ck you up!");
-        notification.setContent("Hôm nay, PM05 Gear chúng tôi hân hạnh mang đến cho các bạn các sản phẩm với mức giá ưu đãi vô cùng hấp dẫn hỗ trợ cho tất cả mọi người từ học sinh, sinh viên cho đến doanh nhân, công nhân cho đến cán bộ viên nhà nước. Còn chờ gì mà không đến PM05 Gear ? Hãy nhanh tay đến thăm trang web của chúng tôi nào!");
-        notifications.add(notification);
+        // User validation
+        Map<String, Object> path = ServletUtil.userValidate(request, response);
+
+        // Get user validation result
+        UserValidationResult result = (UserValidationResult)path.get("userValidateResult");
+
+        // User not logged in case
+        if (result != UserValidationResult.SUCCESSFULLY) {
+            ServletUtil.showPermissionRequiredMessage(request, response);
+            return;
+        }
+
+        // Get user from path
+        User user = (User)path.get("user");
+
+        // Get user's notifications
+        Set<UserNotification> notifications = user.getNotifications();
+
+        // Set notifications attribute for request
         request.setAttribute("notifications", notifications);
 
         // Get dispatcher
