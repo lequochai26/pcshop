@@ -28,7 +28,7 @@
 
             <!-- Type filter box -->
             <div id="typeFilterBox" class="contentBox" style="width: 95%;">
-                <form action="typesearch" method="post">
+                <form action="searchbytype" method="post">
                     <label for="id" class="label">Tìm kiếm theo loại: </label>
                     <select id="id" name="id" class="textbox" required>
 
