@@ -15,8 +15,6 @@
 
         <!-- Styles inclusion -->
         <jsp:include page="styles/general.jsp"/>
-        <jsp:include page="styles/cartitemboxstyle.jsp"/>
-        <jsp:include page="styles/cartitemcontrolboxstyle.jsp"/>
 
         <!-- CSS files linking -->
         <link rel="stylesheet" href="./css/formpage.css"/>
@@ -29,18 +27,60 @@
 
         <!-- Body -->
         <div class="body">
-            <!-- Cart items control content box -->
-            <div class="contentBox" style="margin-bottom: 25px;">
-               <jsp:include page="components/cartitemcontrolbox.jsp"/>
+
+            <!-- Cart item displaying -->
+            <div class="contentBox">
+                
+                <!-- Order form -->
+                <form action="orderrequest" method="post">
+
+                    <!-- Cart items displaying table -->
+                    <table>
+                        <!-- Heading row -->
+                        <tr>
+                            <th></th>
+                            <th>Sản phẩm</th>
+                            <th>Đơn giá</th>
+                            <th>Số lượng</th>
+                            <th>Tổng tiền</th>
+                            <th>Hành động</th>
+                        </tr>
+
+                        <!-- Displaying each item per row -->
+                        <c:forEach var="cartItem" items="${cartItems}">
+                            <tr>
+                                <td>
+                                    <input type="checkbox" id="${cartItem.item.id}" name="${cartItem.item.name}"/>
+                                </td>
+
+                                <td>
+                                    <img src="itemimage?id=${cartItem.item.avatar.id}" class="itemAvatar"/>
+                                    <a href="itemdetail?id=${cartItem.item.id}">
+                                        ${cartItem.item.name}
+                                    </a>
+                                </td>
+
+                                <td>
+                                    ${cartItem.amount}
+                                </td>
+
+                                <td>
+                                    ${cartItem.amount * cartItem.item.price}
+                                </td>
+
+                                <td>
+                                    <a href="removecartitem?id=${cartItem.item.id}">
+                                        Xóa
+                                    </a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+
+                </form>
+
             </div>
 
-            <!-- Cart items content box -->
-            <div class="contentBox">
-                <!-- Cart Items -->
-                <c:forEach var="i" begin="1" end="100">
-                    <jsp:include page="components/cartitembox.jsp"/>
-                </c:forEach>
-            </div>
         </div>
 
         <!-- Footer -->
