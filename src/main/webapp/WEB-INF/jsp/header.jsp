@@ -4,8 +4,9 @@
 <div class="header">
     <img src="./assets/pcshop_icon.png" class="pcshop_icon"/>
 
-    <form>
-        <input class="kwinput" name="keyword" type="text" placeholder="Nhập từ khóa tìm kiếm" />
+    <!-- Search item -->
+    <form action="search" method="post">
+        <input class="kwinput" id="content" name="content" type="text" placeholder="Nhập từ khóa tìm kiếm" />
         <input type="submit" value="" class="searchBtn" title="Search" />
     </form>
 
