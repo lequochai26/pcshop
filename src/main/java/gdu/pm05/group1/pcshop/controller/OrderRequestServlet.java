@@ -155,7 +155,7 @@ public class OrderRequestServlet extends HttpServlet {
 
         // Send redirect to order detail page
         response.sendRedirect(
-            "orderdetail?id='@id'".replace("@id", ""+order.getId())
+            "orderdetail?id=@id".replace("@id", ""+order.getId())
         );
     }
 

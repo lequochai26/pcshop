@@ -50,7 +50,7 @@
                         <c:forEach var="cartItem" items="${cartItems}">
                             <tr>
                                 <td>
-                                    <input type="checkbox" id="${cartItem.item.id}" name="${cartItem.item.name}"/>
+                                    <input type="checkbox" id="${cartItem.item.id}" name="${cartItem.item.id}"/>
                                 </td>
 
                                 <td style="text-align: left;">
