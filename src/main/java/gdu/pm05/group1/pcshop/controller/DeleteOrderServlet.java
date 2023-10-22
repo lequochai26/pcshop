@@ -2,10 +2,12 @@ package gdu.pm05.group1.pcshop.controller;
 
 import java.io.IOException;
 
+import gdu.pm05.group1.pcshop.controller.util.ServletUtil;
 import gdu.pm05.group1.pcshop.model.Order;
 import gdu.pm05.group1.pcshop.model.OrderItem;
 import gdu.pm05.group1.pcshop.model.dbhandler.HQLParameter;
 import gdu.pm05.group1.pcshop.model.dbhandler.IDBHandler;
+import gdu.pm05.group1.pcshop.model.enums.OrderStatus;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -82,6 +84,22 @@ public class DeleteOrderServlet extends AdministratorServlet {
             );
             request.setAttribute("color", "red");
             request.getRequestDispatcher("message").forward(request, response);
+            return;
+        }
+
+        // Check order status's
+        OrderStatus status = order.getStatus();
+
+        // Order status not delivered successfully and not cancelled
+        if (
+            status != OrderStatus.DELIVERED_SUCCESSFULLY
+            &&
+            status != OrderStatus.CANCELLED
+        ) {
+            ServletUtil.showMessage(
+                request, response,
+                "Chỉ có thể xóa những đơn hàng trong trạng thái đã giao hoặc đã hủy!"
+            );
             return;
         }
 
