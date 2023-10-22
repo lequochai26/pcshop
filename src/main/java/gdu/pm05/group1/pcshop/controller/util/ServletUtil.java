@@ -20,6 +20,27 @@ import jakarta.servlet.http.Part;
 
 public class ServletUtil {
     // STATIC METHODS:
+    public static void showDataNotExistMessage(
+        HttpServletRequest request,
+        HttpServletResponse response
+    ) throws ServletException, IOException {
+        // Show data not exist message
+        showDataNotExistMessage(request, response, "black");
+    }
+
+    public static void showDataNotExistMessage(
+        HttpServletRequest request,
+        HttpServletResponse response,
+        String color
+    ) throws ServletException, IOException {
+        // Show message
+        showMessage(
+            request, response,
+            "Dữ liệu này không tồn tại, vui lòng thử lại!",
+            color
+        );
+    }
+
     public static void showInvalidInputMessage(
         HttpServletRequest request,
         HttpServletResponse response
