@@ -4,11 +4,11 @@
 <div class="notificationBox" seen="${notification.seen}">
     <div class="notificationTitle">
         <a href="notificationdetail?id=${notification.notification.id}">
-            ${notification.title}
+            ${notification.notification.title}
         </a>
     </div>
 
     <div class="notificationDate">
-        ${notification.date}
+        ${notification.notification.date}
     </div>
 </div>
