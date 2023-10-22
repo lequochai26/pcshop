@@ -47,6 +47,11 @@
                 <a href="usersmanagement" class="usersManagementUrl">
                     Quản lý thông tin người dùng
                 </a>
+
+                <!-- Notification sending -->
+                <a href="sendnotification" class="sendNotificationUrl">
+                    Gửi thông báo
+                </a>
             </div>
         </div>
 

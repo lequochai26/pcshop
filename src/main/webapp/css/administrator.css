@@ -53,3 +53,8 @@
     /* Background */
     background-image: url("/pcshop/assets/user.png");
 }
+
+.contentBox .sendNotificationUrl::before {
+    /* Background */
+    background-image: url("/pcshop/assets/notification_black.png");
+}
