@@ -35,7 +35,7 @@
                 <form action="orderrequest" method="post">
 
                     <!-- Cart items displaying table -->
-                    <table>
+                    <table cellpadding="10">
                         <!-- Heading row -->
                         <tr>
                             <th></th>
