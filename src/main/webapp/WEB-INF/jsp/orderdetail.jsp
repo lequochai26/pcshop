@@ -18,6 +18,17 @@
         <!-- CSS files linking -->
         <link rel="stylesheet" href="./css/formpage.css"/>
         <link rel="stylesheet" href="./css/orderdetail.css"/>
+
+        <!-- Custom style definition -->
+        <style>
+            .button {
+                /* Font/text */
+                font-size: 18px;
+
+                /* Padding */
+                padding: 5px;
+            }
+        </style>
     </head>
 
     <body>
@@ -104,7 +115,7 @@
                                     </td>
 
                                     <td>
-                                        <a href="itemdetail?id=${item.item.id}" class="button" style="font-size: 18px; padding: 5px;">
+                                        <a href="itemdetail?id=${item.item.id}" class="button">
                                             Xem chi tiết
                                         </a>
                                     </td>
@@ -136,20 +147,49 @@
 
                         <!-- Admin case -->
                         <c:if test="${user.permission == 'ADMIN'}">
-                            <form action="editorderstatus?id=${order.id}" method="post">
-                                <select id="orderStatus" name="orderStatus" class="textbox">
+                            <form action="editorderstatus" method="post">
+                                <input id="id" name="id" value="${order.id}" hidden/>
+
+                                <select id="status" name="status" class="textbox">
+
                                     <c:forEach var="orderStatus" items="${OrderStatus}">
+
                                         <c:if test="${orderStatus.value != order.status}">
                                             <option value="${orderStatus.value}">${orderStatus}</option>
                                         </c:if>
+
                                         <c:if test="${orderStatus.value == order.status}">
                                             <option value="${orderStatus.value}" selected>${orderStatus}</option>
                                         </c:if>
+
                                     </c:forEach>
+
                                 </select>
 
                                 <input type="submit" value="Cập nhật" class="button"/>
                             </form>
+                        </c:if>
+                    </p>
+                </div>
+
+                <!-- Action area -->
+                <div class="actionArea">
+                    <p>
+                        <!-- Home page button -->
+                        <a href="home" class="button">Quay lại trang chủ</a>
+
+                        <!-- Cancel button -->
+                        <c:if test="${user.username == order.user.username}">
+                            <c:if test="${order.status == 'AWAITING_CONFIRMATION'}">
+                                <a href="editorderstatus?id=${order.id}&status=CANCELLED" class="button">Hủy đơn hàng</a>
+                            </c:if>
+                        </c:if>
+
+                        <!-- Delete button -->
+                        <c:if test="${user.permission == 'ADMIN'}">
+                            <c:if test="${order.status == 'DELIVERED_SUCCESSFULLY' || order.status == 'CANCELLED'}">
+                                <a href="deleteorder?id=${order.id}" class="button">Xóa đơn hàng</a>
+                            </c:if>
                         </c:if>
                     </p>
                 </div>
