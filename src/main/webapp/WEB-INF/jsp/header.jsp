@@ -24,9 +24,11 @@
         </c:otherwise>
     </c:choose>
 
-    <a href="notification" class="notificationUrl">
-        Thông báo
-    </a>
+    <c:if test="${not empty user}">
+        <a href="notifications" class="notificationUrl">
+            Thông báo
+        </a>
+    </c:if>
 
     <a href="cart" class="cartUrl">
         Giỏ hàng
