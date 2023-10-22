@@ -19,7 +19,7 @@ public class ItemImage {
     @Column (name = "id")
     private int id;
 
-    @Column (name = "content", nullable = false, columnDefinition = "content LONGBLOB NOT NULL")
+    @Column (name = "content", nullable = false, columnDefinition = "LONGBLOB NOT NULL")
     private byte[] content;
 
     @ManyToOne (fetch = FetchType.EAGER)
