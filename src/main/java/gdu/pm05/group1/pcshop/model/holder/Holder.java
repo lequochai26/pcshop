@@ -2,7 +2,7 @@ package gdu.pm05.group1.pcshop.model.holder;
 
 public abstract class Holder<T> {
     // FIELDS:
-    private T value;
+    protected T value;
 
     // CONSTRUCTORS:
     public Holder() {
