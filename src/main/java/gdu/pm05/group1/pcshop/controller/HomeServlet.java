@@ -2,12 +2,12 @@ package gdu.pm05.group1.pcshop.controller;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
-
 import gdu.pm05.group1.pcshop.controller.util.ServletUtil;
 import gdu.pm05.group1.pcshop.model.Item;
+import gdu.pm05.group1.pcshop.model.ItemType;
 import gdu.pm05.group1.pcshop.model.dbhandler.IDBHandler;
 import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,10 +25,13 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // User validation
-        Map<String, Object> path = ServletUtil.userValidate(request, response);
+        ServletUtil.userValidate(request, response);
+
+        // Get context
+        ServletContext context = request.getServletContext();
 
         // Get DBHandler
-        IDBHandler dbHandler = (IDBHandler)path.get("dbHandler");
+        IDBHandler dbHandler = (IDBHandler)context.getAttribute("dbHandler");
 
         // If request's items property is null
         if (request.getAttribute("items") == null) {
@@ -38,6 +41,12 @@ public class HomeServlet extends HttpServlet {
             // Set items attribute for request
             request.setAttribute("items", items);
         }
+
+        // Get all item types
+        List<ItemType> types = dbHandler.getAll(ItemType.class);
+
+        // Set types attribute for request
+        request.setAttribute("types", types);
 
         // Get dispatcher
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/homepage.jsp");
