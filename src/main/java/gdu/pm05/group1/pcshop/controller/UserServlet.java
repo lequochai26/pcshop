@@ -29,7 +29,7 @@ public class UserServlet extends HttpServlet {
         UserValidationResult result = (UserValidationResult)path.get("userValidateResult");
 
         // Not logged in case
-        if (result != UserValidationResult.NOT_LOGGED_IN) {
+        if (result != UserValidationResult.SUCCESSFULLY) {
             ServletUtil.showLoginRequiredMessage(request, response);
             return;
         }
