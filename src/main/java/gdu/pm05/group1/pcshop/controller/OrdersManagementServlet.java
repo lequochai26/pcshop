@@ -3,8 +3,10 @@ package gdu.pm05.group1.pcshop.controller;
 import java.io.IOException;
 import java.util.List;
 
+import gdu.pm05.group1.pcshop.controller.util.ServletUtil;
 import gdu.pm05.group1.pcshop.model.Order;
 import gdu.pm05.group1.pcshop.model.dbhandler.IDBHandler;
+import gdu.pm05.group1.pcshop.model.holder.OrderStatusHolder;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -42,6 +44,22 @@ public class OrdersManagementServlet extends AdministratorServlet {
 
         // Set orders attribute for request
         request.setAttribute("orders", orders);
+
+        // Get all order status holders
+        List<OrderStatusHolder> statusHolders;
+        try {
+            statusHolders = ServletUtil.getAllStatusHolders();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            ServletUtil.showMessage(
+                request, response, e.toString(), "red"
+            );
+            return;
+        }
+
+        // Set OrderStatus attribute for request
+        request.setAttribute("OrderStatus", statusHolders);
 
         // Get dispatcher
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/ordersmanagement.jsp");
