@@ -9,7 +9,9 @@ import java.util.List;
 import java.util.Map;
 
 import gdu.pm05.group1.pcshop.controller.util.enums.AdministratorValidationResult;
+import gdu.pm05.group1.pcshop.controller.util.enums.GetCartResult;
 import gdu.pm05.group1.pcshop.controller.util.enums.UserValidationResult;
+import gdu.pm05.group1.pcshop.model.Cart;
 import gdu.pm05.group1.pcshop.model.User;
 import gdu.pm05.group1.pcshop.model.dbhandler.IDBHandler;
 import gdu.pm05.group1.pcshop.model.enums.OrderStatus;
@@ -25,6 +27,86 @@ import jakarta.servlet.http.Part;
 
 public class ServletUtil {
     // STATIC METHODS:
+    public static Map<String, Object> getCart(
+        HttpServletRequest request,
+        HttpServletResponse response
+    ) {
+        // Get cart
+        return getCart(request, response, true);
+    }
+
+    public static Map<String, Object> getCart(
+        HttpServletRequest request,
+        HttpServletResponse response,
+        boolean create
+    ) {
+        // Path initialization
+        Map<String, Object> path = new HashMap<>();
+
+        // Get cart
+        getCart(request, response, create, path);
+
+        // Return path
+        return path;
+    }
+
+    public static void getCart(
+        HttpServletRequest request,
+        HttpServletResponse response,
+        Map<String, Object> path
+    ) {
+        // Get cart
+        getCart(request, response, true, path);
+    }
+
+    public static void getCart(
+        HttpServletRequest request,
+        HttpServletResponse response,
+        boolean create,
+        Map<String, Object> path
+    ) {
+        // Get session from request
+        HttpSession session = request.getSession(create);
+        path.put("session", session);
+
+        // Session null case
+        if (session == null) {
+            path.put("getCartResult", GetCartResult.NOT_FOUND);
+            return;
+        }
+
+        // Get user from session
+        User user = (User)session.getAttribute("user");
+        path.put("user", user);
+
+        // Get cart
+        Cart cart = null;
+        if (user != null) {
+            cart = user.getCart();
+            path.put("getCartResult", GetCartResult.USER_CART_FOUND);
+        }
+        else {
+            cart = (Cart)session.getAttribute("cart");
+            if (cart == null) {
+                if (create) {
+                    cart = new Cart();
+                    session.setAttribute("cart", cart);
+                    path.put("getCartResult", GetCartResult.NEW_CART_CREATED);
+                }
+            }
+            else {
+                path.put("getCartResult", GetCartResult.FOUND);
+            }
+        }
+
+        if (cart == null) {
+            path.put("getCartResult", GetCartResult.NOT_FOUND);
+        }
+        else {
+            path.put("cart", cart);
+        }
+    }
+
     public static List<OrderStatusHolder> getAllStatusHolders() throws IllegalArgumentException, IllegalAccessException {
         // List initialization
         List<OrderStatusHolder> list = new ArrayList<>();
