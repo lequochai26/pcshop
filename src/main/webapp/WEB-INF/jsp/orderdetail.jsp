@@ -28,44 +28,130 @@
         <div class="body">
             <!-- Content box -->
             <div class="contentBox" style="text-align: justify; font-family: Arial; font-size: 25px;">
+                <!-- Order ID area -->
+                <div class="orderInfoArea">
+                    <p>
+                        Mã đơn hàng: ${order.id}
+                    </p>
+                </div>
+
+                <!-- Order date area -->
+                <div class="orderDateArea">
+                    <p>
+                        Ngày lập đơn: ${order.date}
+                    </p>
+                </div>
+
                 <!-- Items area -->
                 <div class="itemsArea">
+                    <!-- Title -->
                     <div class="title">
-                        Vật phẩm:
+                        Sản phẩm trong giỏ hàng:
                     </div>
+
+                    <!-- Items -->
                     <div class="items">
-                        <div>
-                            Vật phẩm A x 1 25000
-                        </div>
-                        <div>
-                            Vật phẩm B x 2 98000
-                        </div>
-                        <div>
-                            Vật phẩm C x 5 90250
-                        </div>
+                        <!-- Items table -->
+                        <table cellpadding="10">
+                            <!-- Heading row -->
+                            <tr>
+                                <th>
+                                    Mã sẩn phẩm
+                                </th>
+
+                                <th>
+                                    Tên sản phẩm
+                                </th>
+
+                                <th>
+                                    Số lượng
+                                </th>
+
+                                <th>
+                                    Đơn giá
+                                </th>
+
+                                <th>
+                                    Tổng
+                                </th>
+
+                                <th>
+                                    Hành động
+                                </th>
+                            </tr>
+
+                            <!-- Adding each item as a row -->
+                            <c:forEach var="item" items="${order.items}">
+                                <tr>
+                                    <td>
+                                        ${item.item.id}
+                                    </td>
+
+                                    <td>
+                                        ${item.item.name}
+                                    </td>
+
+                                    <td>
+                                        ${item.amount}
+                                    </td>
+
+                                    <td>
+                                        ${item.item.price}
+                                    </td>
+
+                                    <td>
+                                        ${item.amount * item.item.price}
+                                    </td>
+
+                                    <td>
+                                        <a href="itemdetail?id=${item.item.id}" class="button" style="font-size: 18px; padding: 5px;">
+                                            Xem chi tiết
+                                        </a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </table>
                     </div>
                 </div>
 
-                <!-- Price area -->
-                <div class="priceArea" style="margin-bottom: 50px;">
-                    Tổng đơn hàng: 213250
+                <!-- Total price area -->
+                <div class="totalPriceArea">
+                    <p>
+                        Tổng giá trị đơn hàng: ${order.totalPrice}
+                    </p>
                 </div>
 
-                <!-- Payment area -->
-                <div class="paymentArea">
-                    <div class="paymentTitle">
-                        Phương thức thanh toán:
-                    </div>
-                    <div class="paymentMethods">
-                        <ul>
-                            <li>Tài khoản ngân hàng</li>
-                            <li>Số dư trong ví</li>
-                        </ul>
-                    </div>
-                </div>
+                <!-- Order status area -->
+                <div class="orderStatusArea">
+                    <p>
+                        Trạng thái đơn hàng: 
+                        <!-- Non-Admin case -->
+                        <c:if test="${user.permission != 'ADMIN'}">
+                            <c:forEach var="orderStatus" items="${OrderStatus}">
+                                <c:if test="${orderStatus.value == order.status}">
+                                    ${orderStatus}
+                                </c:if>
+                            </c:forEach>
+                        </c:if>
 
-                <div class="orderArea" style="text-align: center;">
-                    <button style="width: fit-content; background-color: rgb(98, 175, 252); border: 1px solid black; border-radius: 5px; padding-top: 5px; padding-bottom: 5px;">Đặt hàng</button>
+                        <!-- Admin case -->
+                        <c:if test="${user.permission == 'ADMIN'}">
+                            <form action="editorderstatus?id=${order.id}" method="post">
+                                <select id="orderStatus" name="orderStatus" class="textbox">
+                                    <c:forEach var="orderStatus" items="${OrderStatus}">
+                                        <c:if test="${orderStatus.value != order.status}">
+                                            <option value="${orderStatus.value}">${orderStatus}</option>
+                                        </c:if>
+                                        <c:if test="${orderStatus.value == order.status}">
+                                            <option value="${orderStatus.value}" selected>${orderStatus}</option>
+                                        </c:if>
+                                    </c:forEach>
+                                </select>
+
+                                <input type="submit" value="Cập nhật" class="button"/>
+                            </form>
+                        </c:if>
+                    </p>
                 </div>
             </div>
         </div>
