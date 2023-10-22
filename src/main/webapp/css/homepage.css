@@ -1,67 +1,74 @@
-.body {
-    /* Position */
-    position: relative;
-}
+.itemBox {
+    /* Display */
+    display: inline-block;
 
-.banner {
-    /* Position */
-    position: relative;
-    z-index: 0;
-    
-    /* Size */
-    width: 100%;
-}
-
-.productTypeBar {
-    /* Position */
-    position: absolute;
-    z-index: 1;
-    top:150px;
-    left: 75px;
-
-    /* Padding */
-    /* padding: 10px; */
+    /* Margin */
+    margin: 10px;
 
     /* Size */
-    width: 250px;
+    width: 350px;
+    height: fit-content;
+
+    /* Font/text */
+    font-family: Arial;
+    font-size: 25px;
 
     /* Border */
-    /* border: 10px;
-    border-color:rgb(0, 0, 0);
-    border-radius: 10px; */
-
-    /* Background */
-    /* background-color: rgb(214, 214, 214); */
+    border: 1px solid black;
+    border-radius: 10px;
 }
 
-.productTypeBar button {
-    /* Cursor */
-    cursor: pointer;
+.itemBox > div {
+    /* Margin */
+    margin: 5px;
+}
 
-    /* Font/Text */
-    font-family: Arial;
-    font-size: 17px;
-    text-align: center;
-    color: rgb(114, 114, 114);
-
-    /* Background */
-    background-color: rgb(214, 214, 214);
-
-    /* Padding */
-    padding: 5px;
-
+.itemBox .itemAvatar {
     /* Display */
     display: block;
 
-    /* Border */
-    border-top-width: 1px;
-    border-top-style: solid;
-    border-top-color:rgb(114, 114, 114);
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    border-bottom-color:rgb(114, 114, 114);
-
     /* Size */
     width: 100%;
-    height: fit-content;
+    height: 200px;
+
+    /* Font/text */
+    text-align: center;
+}
+
+.itemBox .itemAvatar img {
+    /* Display */
+    display: inline;
+
+    /* Size */
+    width: 200px;
+    height: 200px;
+}
+
+.itemBox .itemInfo {
+    /* Display */
+    display: block;
+
+    /* Text align */
+    text-align: justify;
+}
+
+.itemBox .itemInfo .itemName {
+    /* Font/text */
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.itemBox .viewItem {
+    /* Display */
+    display: block;
+
+    /* Font/text */
+    text-align: center;
+}
+.itemBox .addItemToCart {
+    /* Display */
+    display: block;
+
+    /* Font/Text */
+    text-align: center;
 }

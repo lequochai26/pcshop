@@ -27,7 +27,7 @@
         <div class="body">
 
             <!-- Type filter box -->
-            <div id="typeFilterBox" class="contentBox">
+            <div id="typeFilterBox" class="contentBox" style="width: 95%;">
                 <form action="typesearch" method="post">
                     <label for="id" class="label">Tìm kiếm theo loại: </label>
                     <select id="id" name="id" class="textbox" required>
@@ -51,6 +51,48 @@
                     </select>
                     <input type="submit" class="button" value="Tìm kiếm"/>
                 </form>
+            </div>
+
+            <!-- Items displaying box -->
+            <div id="itemDisplayBox" class="contentBox" style="width: 95%; text-align: justify;">
+
+                <!-- Items displaying -->
+                <c:forEach var="item" items="${items}">
+
+                    <div class="itemBox">
+                        <div class="itemAvatar">
+                            <img src="itemimage?id=${item.avatar.id}"/>
+                        </div>
+
+                        <div class="itemInfo">
+                            <p class="itemName">
+                                ${item.name}
+                            </p>
+
+                            <p class="itemAmount">
+                                Số lượng còn: ${item.amount}
+                            </p>
+
+                            <p class="itemPrice">
+                                Đơn giá: ${item.price}
+                            </p>
+                        </div>
+
+                        <div class="viewItem">
+                            <a href="itemdetail?id=${item.id}" class="button">
+                                Xem sản phẩm
+                            </a>
+                        </div>
+
+                        <div class="addItemToCart">
+                            <a href="addcartitem?id=${item.id}&amount=1" class="button">
+                                Thêm vào giỏ hàng
+                            </a>
+                        </div>
+                    </div>
+
+                </c:forEach>
+
             </div>
 
         </div>
