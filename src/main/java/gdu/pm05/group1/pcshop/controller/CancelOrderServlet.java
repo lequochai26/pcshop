@@ -74,7 +74,7 @@ public class CancelOrderServlet extends HttpServlet {
         User user = (User)path.get("user");
 
         // Check if order's user is different from current user
-        if (order.getUser().getUsername().equals(user.getUsername())) {
+        if (!order.getUser().getUsername().equals(user.getUsername())) {
             ServletUtil.showPermissionRequiredMessage(request, response);
             return;
         }
@@ -91,8 +91,13 @@ public class CancelOrderServlet extends HttpServlet {
         // Change order's status to cancelled
         order.setStatus(OrderStatus.CANCELLED);
 
+        // Save order to DB
+        dbHandler.save(order);
+
         // Send redirect back to current url
-        response.sendRedirect(request.getRequestURL().toString());
+        response.sendRedirect(
+            "orderdetail?id=@id".replace("@id", ""+id)
+        );
     }
 
     @Override
