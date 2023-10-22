@@ -181,7 +181,7 @@
                         <!-- Cancel button -->
                         <c:if test="${user.username == order.user.username}">
                             <c:if test="${order.status == 'AWAITING_CONFIRMATION'}">
-                                <a href="editorderstatus?id=${order.id}&status=CANCELLED" class="button">Hủy đơn hàng</a>
+                                <a href="cancelorder?id=${order.id}" class="button">Hủy đơn hàng</a>
                             </c:if>
                         </c:if>
 
