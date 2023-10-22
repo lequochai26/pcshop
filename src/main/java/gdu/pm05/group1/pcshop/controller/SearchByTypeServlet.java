@@ -44,27 +44,24 @@ public class SearchByTypeServlet extends HttpServlet {
         // Get ItemType entity with given id
         ItemType type = dbHandler.get(ItemType.class, new HQLParameter("id", id));
 
-        // Type not exist case
-        if (type == null) {
-            ServletUtil.showDataNotExistMessage(request, response);
-            return;
-        }
-
         // Get all items in db
         List<Item> items = dbHandler.getAll(Item.class);
 
-        // Filtering
-        for (int i = 0;i<items.size();i++) {
-            // Get item
-            Item item = items.get(i);
+        // Only filtering when type not null
+        if (type != null) {
+            // Filtering
+            for (int i = 0;i<items.size();i++) {
+                // Get item
+                Item item = items.get(i);
 
-            // Get item's type
-            ItemType itemType = item.getType();
+                // Get item's type
+                ItemType itemType = item.getType();
 
-            // Not matches case
-            if (!itemType.getId().equals(type.getId())) {
-                items.remove(i);
-                i--;
+                // Not matches case
+                if (!itemType.getId().equals(type.getId())) {
+                    items.remove(i);
+                    i--;
+                }
             }
         }
 
