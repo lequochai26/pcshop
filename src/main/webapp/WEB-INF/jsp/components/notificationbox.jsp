@@ -3,7 +3,7 @@
 
 <div class="notificationBox" seen="${notification.seen}">
     <div class="notificationTitle">
-        <a href="notificationdetail?id=${notification.id}">
+        <a href="notificationdetail?id=${notification.notification.id}">
             ${notification.title}
         </a>
     </div>
