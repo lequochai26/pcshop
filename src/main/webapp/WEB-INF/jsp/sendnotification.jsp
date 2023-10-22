@@ -31,6 +31,18 @@
                 <form action="sendnotification" method="post">
                     <!-- Send notification table -->
                     <table cellpadding="10">
+                        <!-- Send To Row -->
+                        <tr>
+                            <td>
+                                <label for="to" class="label">
+                                    Gửi đến:
+                                </label>
+                            </td>
+                            <td>
+                                <input type="text" id="to" name="to" class="textbox" placeholder="Email người dùng, * cho tất cả" style="width: 500px;" required/>
+                            </td>
+                        </tr>
+
                         <!-- Title Row -->
                         <tr>
                             <td>
