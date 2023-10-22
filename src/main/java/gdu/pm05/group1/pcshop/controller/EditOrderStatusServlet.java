@@ -8,6 +8,7 @@ import gdu.pm05.group1.pcshop.controller.util.enums.AdministratorValidationResul
 import gdu.pm05.group1.pcshop.model.Order;
 import gdu.pm05.group1.pcshop.model.dbhandler.HQLParameter;
 import gdu.pm05.group1.pcshop.model.dbhandler.IDBHandler;
+import gdu.pm05.group1.pcshop.model.enums.OrderStatus;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -47,6 +48,12 @@ public class EditOrderStatusServlet extends HttpServlet {
         // Get order id
         String idStr = request.getParameter("id");
 
+        // ID null case
+        if (idStr == null) {
+            ServletUtil.showInputRequiredMessage(request, response);
+            return;
+        }
+
         // Cast id into an integer
         int id;
         try {
@@ -58,6 +65,24 @@ public class EditOrderStatusServlet extends HttpServlet {
             return;
         }
 
+        // Get status
+        String statusStr = request.getParameter("status");
+
+        // Status string null case
+        if (statusStr == null) {
+            ServletUtil.showInputRequiredMessage(request, response);
+            return;
+        }
+
+        // Cast statusStr to OrderStatus
+        OrderStatus status = OrderStatus.valueOf(statusStr);
+
+        // Status null case
+        if (status == null) {
+            ServletUtil.showInvalidInputMessage(request, response);
+            return;
+        }
+
         // Get DBHander
         IDBHandler dbHandler = (IDBHandler)path.get("dbHandler");
 
@@ -65,6 +90,18 @@ public class EditOrderStatusServlet extends HttpServlet {
         Order order = dbHandler.get(Order.class, new HQLParameter("id", id));
 
         // Order not exist case
-        
+        if (order == null) {
+            ServletUtil.showDataNotExistMessage(request, response);
+            return;
+        }
+
+        // Set order status for order
+        order.setStatus(status);
+
+        // Save order into db
+        dbHandler.save(order);
+
+        // Send redirect back to ordersmanagement page
+        response.sendRedirect("ordersmanagement");
     }
 }
