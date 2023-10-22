@@ -1,5 +1,6 @@
 package gdu.pm05.group1.pcshop.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -28,6 +29,7 @@ public class Cart {
 
     // CONSTRUCTORS:
     public Cart() {
+        items = new HashSet<>();
     }
     public Cart(String username, User user, Set<CartItem> items) {
         this.username = username;
