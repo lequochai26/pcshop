@@ -353,8 +353,9 @@ public class DBHandler implements IDBHandler, Destroyable {
             Method fieldGetter = null;
             try {
                 fieldGetter = objClass.getDeclaredMethod(
-                    "get" + fieldName.replace(
-                        fieldName.charAt(0), Character.toUpperCase(fieldName.charAt(0))
+                    "get" + fieldName.replaceFirst(
+                        ""+fieldName.charAt(0),
+                        ""+Character.toUpperCase(fieldName.charAt(0))
                     )
                 );
             }
