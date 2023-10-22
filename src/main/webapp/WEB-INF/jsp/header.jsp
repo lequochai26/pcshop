@@ -26,7 +26,7 @@
     </c:choose>
 
     <c:if test="${not empty user}">
-        <a href="notifications" class="notificationUrl">
+        <a href="notification" class="notificationUrl">
             Thông báo
         </a>
     </c:if>
