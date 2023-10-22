@@ -20,6 +20,90 @@ import jakarta.servlet.http.Part;
 
 public class ServletUtil {
     // STATIC METHODS:
+    public static void showInvalidInputMessage(
+        HttpServletRequest request,
+        HttpServletResponse response
+    ) throws ServletException, IOException {
+        // Show invalid input message
+        showInvalidInputMessage(request, response, "black");
+    }
+
+    public static void showInvalidInputMessage(
+        HttpServletRequest request,
+        HttpServletResponse response,
+        String color
+    ) throws ServletException, IOException {
+        // Show message
+        showMessage(
+            request, response,
+            "Thông tin truy cập không hợp lệ!",
+            color
+        );
+    }
+
+    public static void showInputRequiredMessage(
+        HttpServletRequest request,
+        HttpServletResponse response
+    ) throws ServletException, IOException {
+        // Show input required message
+        showInputRequiredMessage(request, response, "black");
+    }
+
+    public static void showInputRequiredMessage(
+        HttpServletRequest request,
+        HttpServletResponse response,
+        String color
+    ) throws ServletException, IOException {
+        // Show message
+        showMessage(
+            request, response,
+            "Không đủ thông tin truy cập!",
+            color
+        );
+    }
+
+    public static void showPermissionRequiredMessage(
+        HttpServletRequest request,
+        HttpServletResponse response
+    ) throws ServletException, IOException {
+        // Show permission required message
+        showPermissionRequiredMessage(request, response, "black");
+    }
+
+    public static void showPermissionRequiredMessage(
+        HttpServletRequest request,
+        HttpServletResponse response,
+        String color
+    ) throws ServletException, IOException {
+        // Show message
+        showMessage(
+            request, response,
+            "Bạn không có quyền truy cập vào trang này!",
+            color
+        );
+    }
+
+    public static void showLoginRequiredMessage(
+        HttpServletRequest request,
+        HttpServletResponse response
+    ) throws ServletException, IOException {
+        // Show login required message
+        showLoginRequiredMessage(request, response, "black");
+    }
+
+    public static void showLoginRequiredMessage(
+        HttpServletRequest request,
+        HttpServletResponse response,
+        String color
+    ) throws ServletException, IOException {
+        // Show message
+        showMessage(
+            request, response,
+            "Vui lòng đăng nhập trước khi truy cập vào trang này!",
+            color
+        );
+    }
+
     public static void showMessage(
         HttpServletRequest request,
         HttpServletResponse response,
