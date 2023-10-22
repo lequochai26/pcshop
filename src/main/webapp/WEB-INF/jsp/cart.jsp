@@ -65,7 +65,7 @@
                                 </td>
 
                                 <td>
-                                    <a href="editcartitemamount?id=${cartItem.item.id}&amount=1" class="button" style="display: inline-block; width: 35px; height: 35px; padding: 0px;">
+                                    <a href="editcartitemamount?id=${cartItem.item.id}&amount=-1" class="button" style="display: inline-block; width: 35px; height: 35px; padding: 0px;">
                                         -
                                     </a>
                                     ${cartItem.amount}
