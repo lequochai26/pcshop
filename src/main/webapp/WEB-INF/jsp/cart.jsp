@@ -53,7 +53,7 @@
                                     <input type="checkbox" id="${cartItem.item.id}" name="${cartItem.item.name}"/>
                                 </td>
 
-                                <td>
+                                <td style="text-align: left;">
                                     <img src="itemimage?id=${cartItem.item.avatar.id}" class="itemAvatar"/>
                                     <a href="itemdetail?id=${cartItem.item.id}">
                                         ${cartItem.item.name}
@@ -61,7 +61,17 @@
                                 </td>
 
                                 <td>
+                                    ${cartItem.item.price}
+                                </td>
+
+                                <td>
+                                    <a href="editcartitemamount?id=${cartItem.item.id}&amount=1" class="button" style="display: inline-block; width: 35px; height: 35px; padding: 0px;">
+                                        -
+                                    </a>
                                     ${cartItem.amount}
+                                    <a href="editcartitemamount?id=${cartItem.item.id}&amount=1" class="button" style="display: inline-block; width: 35px; height: 35px; padding: 0px;">
+                                        +
+                                    </a>
                                 </td>
 
                                 <td>
@@ -69,12 +79,30 @@
                                 </td>
 
                                 <td>
-                                    <a href="removecartitem?id=${cartItem.item.id}">
+                                    <a href="removecartitem?id=${cartItem.item.id}" class="button">
                                         Xóa
                                     </a>
                                 </td>
                             </tr>
                         </c:forEach>
+
+                        <!-- Order request row -->
+                        <tr>
+
+                            <td colspan="6">
+
+                                <c:if test="${not empty user}">
+                                    <input type="submit" value="Đặt hàng" class="button"/>
+                                </c:if>
+                                <c:if test="${empty user}">
+                                    <p style="font-size: 18px; color: darkgray;">
+                                        Vui lòng đăng nhập hoặc đăng ký trước khi đặt hàng!
+                                    </p>
+                                </c:if>
+
+                            </td>
+
+                        </tr>
                     </table>
 
                 </form>

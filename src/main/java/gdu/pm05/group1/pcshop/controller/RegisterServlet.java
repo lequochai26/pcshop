@@ -151,16 +151,11 @@ public class RegisterServlet extends HttpServlet {
         cart.setUser(user);
 
         // Save all data related to user to database
-        if (cartItems == null) {
-            dbHandler.save(user, userInfo, cart);
-        }
-        else {
-            dbHandler.save(
-                user,
-                userInfo,
-                cart,
-                cartItems.toArray(new CartItem[]{})
-            );
+        dbHandler.save(user, userInfo, cart);
+        if (cartItems != null) {
+            for (CartItem cartItem : cartItems) {
+                dbHandler.save(cartItem);
+            }
         }
 
         // Set attributes for request
