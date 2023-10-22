@@ -19,14 +19,14 @@ public class EntityMatcher {
             String fieldName = field.getName();
 
             // Get getter method name
-            String fieldGetterMethodName = "get" + fieldName.replace(
-                fieldName.charAt(0), Character.toUpperCase(
+            String fieldGetterMethodName = "get" + fieldName.replaceFirst(
+                ""+fieldName.charAt(0), ""+Character.toUpperCase(
                     fieldName.charAt(0)
                 )
             );
 
             // Get getter method
-            Method method = entityClass.getMethod(fieldName);
+            Method method = entityClass.getMethod(fieldGetterMethodName);
 
             // Get field value from method
             Object fieldValue = method.invoke(entity);
