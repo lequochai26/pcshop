@@ -30,10 +30,10 @@
             <div id="typeFilterBox" class="contentBox" style="width: 95%;">
                 <form action="searchbytype" method="post">
                     <label for="id" class="label">Tìm kiếm theo loại: </label>
-                    <select id="id" name="id" class="textbox" required>
+                    <select id="id" name="id" class="textbox">
 
                         <c:if test="${empty param.id}">
-                            <option value="" selected>Tất cả</option>
+                            <option value="*" selected>Tất cả</option>
                         </c:if>
                         <c:if test="${not empty param.id}">
                             <option value="">Tất cả</option>
