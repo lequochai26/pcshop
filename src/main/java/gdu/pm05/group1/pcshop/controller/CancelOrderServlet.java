@@ -5,7 +5,9 @@ import java.util.Map;
 
 import gdu.pm05.group1.pcshop.controller.util.ServletUtil;
 import gdu.pm05.group1.pcshop.controller.util.enums.UserValidationResult;
+import gdu.pm05.group1.pcshop.model.Item;
 import gdu.pm05.group1.pcshop.model.Order;
+import gdu.pm05.group1.pcshop.model.OrderItem;
 import gdu.pm05.group1.pcshop.model.User;
 import gdu.pm05.group1.pcshop.model.dbhandler.HQLParameter;
 import gdu.pm05.group1.pcshop.model.dbhandler.IDBHandler;
@@ -93,6 +95,15 @@ public class CancelOrderServlet extends HttpServlet {
 
         // Save order to DB
         dbHandler.save(order);
+
+        // Recover item's amount in order
+        for (OrderItem orderItem : order.getItems()) {
+            Item item = orderItem.getItem();
+            item.setAmount(
+                item.getAmount() + orderItem.getAmount()
+            );
+            dbHandler.save(item);
+        }
 
         // Send redirect back to current url
         response.sendRedirect(
