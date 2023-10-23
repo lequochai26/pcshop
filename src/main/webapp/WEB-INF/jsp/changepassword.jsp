@@ -47,14 +47,14 @@
             <!-- Content box -->
             <div class="contentBox" style="padding-left: 25px; padding-right: 25px;">
                 <!-- Change password form -->
-                <form action="register" method="post">
+                <form action="changepassword" method="post">
                     <!-- Change password table -->
                     <table cellpadding="10">
                         <!-- Old password row -->
                         <tr>
                             <td>
                                 <label for="oldPassword" class="label">
-                                    Mật khẩu:
+                                    Mật khẩu cũ:
                                 </label>
                             </td>
                             <td>
@@ -66,7 +66,7 @@
                         <tr>
                             <td>
                                 <label for="newPassword" class="label">
-                                    Mật khẩu:
+                                    Mật khẩu mới:
                                 </label>
                             </td>
                             <td>
