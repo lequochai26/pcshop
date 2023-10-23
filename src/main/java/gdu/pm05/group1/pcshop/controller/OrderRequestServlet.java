@@ -67,9 +67,6 @@ public class OrderRequestServlet extends HttpServlet {
         // Get user's cart
         Cart cart = user.getCart();
 
-        // Total price definition
-        double totalPrice = 0;
-
         // Get ordered cart items
         List<OrderItem> orderredItems = new ArrayList<>();
         while (ids.hasMoreElements()) {
@@ -130,9 +127,6 @@ public class OrderRequestServlet extends HttpServlet {
 
             // After transferred items in cart into an order, remove that cart item from cart
             dbHandler.remove(orderredCartItem);
-
-            // Update totalPrice
-            totalPrice += (orderredItem.getAmount() * item.getPrice());
         }
 
         // Create new order
@@ -141,7 +135,6 @@ public class OrderRequestServlet extends HttpServlet {
         // Setup informations for order
         order.setDate(new Date());
         order.setStatus(OrderStatus.AWAITING_CONFIRMATION);
-        order.setTotalPrice(totalPrice);
         order.setUser(user);
 
         // Save order to db
@@ -152,6 +145,15 @@ public class OrderRequestServlet extends HttpServlet {
             orderredItem.setOrder(order);
             dbHandler.save(orderredItem);
         }
+
+        // Refresh order
+        dbHandler.refresh(order);
+
+        // Re-calculate total price for order
+        order.totalPriceCalculate();
+
+        // Save order to db
+        dbHandler.save(order);
 
         // Send redirect to order detail page
         response.sendRedirect(
