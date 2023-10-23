@@ -111,7 +111,7 @@
                                     </td>
 
                                     <td>
-                                        ${item.amount * item.item.price}
+                                        ${item.totalPriceCalculate()}
                                     </td>
 
                                     <td>
