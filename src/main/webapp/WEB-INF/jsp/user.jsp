@@ -56,14 +56,14 @@
                 </div>
 
                 <div>
-                    <a href="changepassword">
-                        Thay đổi mật khẩu
+                    <a href="userorders">
+                        Đơn hàng đã đặt
                     </a>
                 </div>
 
                 <div>
-                    <a href="updateinfo">
-                        Cập nhật thông tin
+                    <a href="changepassword">
+                        Thay đổi mật khẩu
                     </a>
                 </div>
 
