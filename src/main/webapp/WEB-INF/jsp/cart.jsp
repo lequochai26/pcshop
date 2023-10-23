@@ -75,7 +75,7 @@
                                 </td>
 
                                 <td>
-                                    ${cartItem.amount * cartItem.item.price}
+                                    ${cartItem.totalPriceCalculate()}
                                 </td>
 
                                 <td>
