@@ -37,6 +37,9 @@ public class OrderItem implements Serializable {
     }
 
     // METHODS:
+    public double totalPriceCalculate() {
+        return (amount * item.getPrice());
+    }
     public Order getOrder() {
         return order;
     }
