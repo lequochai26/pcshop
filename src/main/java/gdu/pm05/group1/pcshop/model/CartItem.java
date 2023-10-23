@@ -37,6 +37,9 @@ public class CartItem implements Serializable {
     }
 
     // METHODS:
+    public double totalPriceCalculate() {
+        return (amount * item.getPrice());
+    }
     public Cart getCart() {
         return cart;
     }
