@@ -83,6 +83,15 @@ public class EditCartItemAmountServlet extends HttpServlet {
         for (CartItem cartItem : cart.getItems()) {
             // Target cart item detect
             if (cartItem.getItem().getId().equals(id)) {
+                // Amount not valid case
+                if ((cartItem.getAmount() + amount) > cartItem.getItem().getAmount()) {
+                    ServletUtil.showMessage(
+                        request, response,
+                        "Số lượng sản phẩm trong giỏ hàng đã đạt đến tối đa!"
+                    );
+                    return;
+                }
+
                 // Edit amount
                 cartItem.setAmount(
                     cartItem.getAmount() + amount
