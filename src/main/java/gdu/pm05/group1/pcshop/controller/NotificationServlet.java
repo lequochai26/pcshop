@@ -3,12 +3,8 @@ package gdu.pm05.group1.pcshop.controller;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
-import java.util.List;
-import java.util.ArrayList;
-
 import gdu.pm05.group1.pcshop.controller.util.ServletUtil;
 import gdu.pm05.group1.pcshop.controller.util.enums.UserValidationResult;
-import gdu.pm05.group1.pcshop.model.Notification;
 import gdu.pm05.group1.pcshop.model.User;
 import gdu.pm05.group1.pcshop.model.UserNotification;
 import jakarta.servlet.RequestDispatcher;
