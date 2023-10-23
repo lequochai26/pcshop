@@ -1,8 +1,11 @@
 package gdu.pm05.group1.pcshop.controller;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.Set;
 
+import gdu.pm05.group1.pcshop.controller.util.ServletUtil;
+import gdu.pm05.group1.pcshop.controller.util.enums.AdministratorValidationResult;
 import gdu.pm05.group1.pcshop.model.CartItem;
 import gdu.pm05.group1.pcshop.model.Item;
 import gdu.pm05.group1.pcshop.model.ItemImage;
@@ -25,11 +28,15 @@ public class DeleteItemServlet extends ItemManagementServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Validation
-        boolean valid = this.validateAdministrator(request, response);
+        // Administrator validation
+        Map<String, Object> path = ServletUtil.administratorValidate(request, response);
 
-        // Exit if not valid
-        if (!valid) {
+        // Get user administrator validation result
+        AdministratorValidationResult result = (AdministratorValidationResult)path.get("administratorValidateResult");
+
+        // Validation failed case
+        if (result != AdministratorValidationResult.IS_ADMINISTRATOR) {
+            ServletUtil.showPermissionRequiredMessage(request, response);
             return;
         }
 
@@ -38,12 +45,7 @@ public class DeleteItemServlet extends ItemManagementServlet {
 
         // Id null case
         if (id == null) {
-            request.setAttribute(
-                "message",
-                "Không đủ thông tin để thực hiện hành động này"
-            );
-            request.setAttribute("color", "red");
-            request.getRequestDispatcher("message").forward(request, response);
+            ServletUtil.showInputRequiredMessage(request, response);
             return;
         }
 
@@ -61,12 +63,7 @@ public class DeleteItemServlet extends ItemManagementServlet {
 
         // Item not exist case
         if (item == null) {
-            request.setAttribute(
-                "message",
-                "Sản phẩm với mã số '@id' không tồn tại!".replace("@id", id)
-            );
-            request.setAttribute("color", "red");
-            request.getRequestDispatcher("message").forward(request, response);
+            ServletUtil.showDataNotExistMessage(request, response);
             return;
         }
 
@@ -79,23 +76,19 @@ public class DeleteItemServlet extends ItemManagementServlet {
         // Check relationship conditions
         // Orders
         if (orders.size() > 0) {
-            request.setAttribute(
-                "message",
+            ServletUtil.showMessage(
+                request, response,
                 "Vật phẩm này hiện đang thuộc một hoặc một số đơn hàng bất kỳ! Không thể xóa!"
             );
-            request.setAttribute("color", "red");
-            request.getRequestDispatcher("message").forward(request, response);
             return;
         }
 
         // Carts
         if (carts.size() > 0) {
-            request.setAttribute(
-                "message",
+            ServletUtil.showMessage(
+                request, response,
                 "Vật phẩm này hiện đang thuộc một hoặc một số giỏ hàng! Không thể xóa!"
             );
-            request.setAttribute("color", "red");
-            request.getRequestDispatcher("message").forward(request, response);
             return;
         }
 

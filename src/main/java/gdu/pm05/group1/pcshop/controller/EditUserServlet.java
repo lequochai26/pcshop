@@ -1,7 +1,10 @@
 package gdu.pm05.group1.pcshop.controller;
 
 import java.io.IOException;
+import java.util.Map;
 
+import gdu.pm05.group1.pcshop.controller.util.ServletUtil;
+import gdu.pm05.group1.pcshop.controller.util.enums.AdministratorValidationResult;
 import gdu.pm05.group1.pcshop.model.User;
 import gdu.pm05.group1.pcshop.model.UserInfo;
 import gdu.pm05.group1.pcshop.model.dbhandler.HQLParameter;
@@ -34,10 +37,14 @@ public class EditUserServlet extends UserManagementServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Administrator validation
-        boolean valid = this.validateAdministrator(request, response);
+        Map<String, Object> path = ServletUtil.administratorValidate(request, response);
 
-        // Exit if not valid
-        if (!valid) {
+        // Get administrator validation result
+        AdministratorValidationResult result = (AdministratorValidationResult)path.get("administratorValidateResult");
+
+        // Administrator validation failed case
+        if (result != AdministratorValidationResult.IS_ADMINISTRATOR) {
+            ServletUtil.showPermissionRequiredMessage(request, response);
             return;
         }
 
@@ -72,14 +79,7 @@ public class EditUserServlet extends UserManagementServlet {
 
         // User not exist case
         if (user == null) {
-            request.setAttribute(
-                "message",
-                "Tài khoản với email '@username', không tồn tại!".replace(
-                    "@username", username
-                )
-            );
-            request.setAttribute("color", "red");
-            request.getRequestDispatcher("message").forward(request, response);
+            ServletUtil.showDataNotExistMessage(request, response);
             return;
         }
 

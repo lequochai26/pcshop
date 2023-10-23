@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import gdu.pm05.group1.pcshop.controller.util.ServletUtil;
+import gdu.pm05.group1.pcshop.controller.util.enums.AdministratorValidationResult;
 import gdu.pm05.group1.pcshop.model.Item;
 import gdu.pm05.group1.pcshop.model.ItemImage;
 import gdu.pm05.group1.pcshop.model.ItemType;
@@ -40,11 +42,15 @@ public class NewItemServlet extends ItemManagementServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Validation
-        boolean valid = this.validateAdministrator(request, response);
+        // Administrator validation
+        Map<String, Object> path = ServletUtil.administratorValidate(request, response);
 
-        // Exit if not valid
-        if (!valid) {
+        // Get administrator validation result
+        AdministratorValidationResult result = (AdministratorValidationResult)path.get("administratorValidateResult");
+
+        // Administrator validation failed
+        if (result != AdministratorValidationResult.IS_ADMINISTRATOR) {
+            ServletUtil.showPermissionRequiredMessage(request, response);
             return;
         }
 

@@ -2,8 +2,10 @@ package gdu.pm05.group1.pcshop.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import gdu.pm05.group1.pcshop.controller.util.ServletUtil;
+import gdu.pm05.group1.pcshop.controller.util.enums.AdministratorValidationResult;
 import gdu.pm05.group1.pcshop.model.Item;
 import gdu.pm05.group1.pcshop.model.ItemType;
 import gdu.pm05.group1.pcshop.model.dbhandler.HQLParameter;
@@ -13,12 +15,13 @@ import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet (name = "itemmanagement", urlPatterns = "/itemmanagement")
 @MultipartConfig
-public class ItemManagementServlet extends AdministratorServlet {
+public class ItemManagementServlet extends HttpServlet {
     // CONSTRUCTORS:
     public ItemManagementServlet() {
         super();
@@ -28,11 +31,15 @@ public class ItemManagementServlet extends AdministratorServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Validation
-        boolean valid = this.validateAdministrator(request, response);
+        // Administrator validation
+        Map<String, Object> path = ServletUtil.administratorValidate(request, response);
 
-        // Exit if not valid
-        if (!valid) {
+        // Get administrator validation result
+        AdministratorValidationResult result = (AdministratorValidationResult)path.get("administratorValidateResult");
+
+        // ADMINISTRATOR VALIDATION FAILED CASE
+        if (result != AdministratorValidationResult.IS_ADMINISTRATOR) {
+            ServletUtil.showPermissionRequiredMessage(request, response);
             return;
         }
 
@@ -42,13 +49,7 @@ public class ItemManagementServlet extends AdministratorServlet {
 
         // Action null case
         if (action == null) {
-            // Show message
-            this.showMessage(
-                request,
-                response,
-                "Không có đủ thông tin để truy cập vào trang này!",
-                "red"
-            );
+            ServletUtil.showInputRequiredMessage(request, response);
             return;
         }
 
@@ -57,13 +58,7 @@ public class ItemManagementServlet extends AdministratorServlet {
             !action.equals("new") &&
             !action.equals("detail")
         ) {
-            // Show message
-            this.showMessage(
-                request,
-                response,
-                "Thông tin truy cập không hợp lệ!",
-                "red"
-            );
+            ServletUtil.showInvalidInputMessage(request, response);
             return;
         }
 
@@ -78,13 +73,7 @@ public class ItemManagementServlet extends AdministratorServlet {
 
             // Id null case
             if (id == null) {
-                // Show message
-                this.showMessage(
-                    request,
-                    response,
-                    "Không có đủ thông tin để truy cập vào trang này!",
-                    "red"
-                );
+                ServletUtil.showInputRequiredMessage(request, response);
                 return;
             }
 
@@ -96,12 +85,7 @@ public class ItemManagementServlet extends AdministratorServlet {
 
             // Item null case
             if (item == null) {
-                // Show message
-                this.showMessage(
-                    request, response,
-                    "Vật phẩm không tồn tại!",
-                    "red"
-                );
+                ServletUtil.showDataNotExistMessage(request, response);
                 return;
             }
 
@@ -145,18 +129,6 @@ public class ItemManagementServlet extends AdministratorServlet {
 
         // Get request dispatcher
         RequestDispatcher dispatcher = request.getRequestDispatcher(endpoint);
-
-        // Forward
-        dispatcher.forward(request, response);
-    }
-
-    private void showMessage(HttpServletRequest request, HttpServletResponse response, String message, String color) throws ServletException, IOException {
-        // Set attributes for request
-        request.setAttribute("message", message);
-        request.setAttribute("color", color);
-
-        // Get request dispatcher
-        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/message.jsp");
 
         // Forward
         dispatcher.forward(request, response);

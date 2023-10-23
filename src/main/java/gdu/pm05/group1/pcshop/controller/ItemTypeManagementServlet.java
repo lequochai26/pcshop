@@ -1,7 +1,10 @@
 package gdu.pm05.group1.pcshop.controller;
 
 import java.io.IOException;
+import java.util.Map;
 
+import gdu.pm05.group1.pcshop.controller.util.ServletUtil;
+import gdu.pm05.group1.pcshop.controller.util.enums.AdministratorValidationResult;
 import gdu.pm05.group1.pcshop.model.ItemType;
 import gdu.pm05.group1.pcshop.model.dbhandler.HQLParameter;
 import gdu.pm05.group1.pcshop.model.dbhandler.IDBHandler;
@@ -9,11 +12,12 @@ import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet (name = "itemtypemanagement", urlPatterns = "/itemtypemanagement")
-public class ItemTypeManagementServlet extends AdministratorServlet {
+public class ItemTypeManagementServlet extends HttpServlet {
     // CONSTRUCTORS:
     public ItemTypeManagementServlet() {
         super();
@@ -23,11 +27,15 @@ public class ItemTypeManagementServlet extends AdministratorServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Validation
-        boolean valid = this.validateAdministrator(request, response);
+        // Administrator validation
+        Map<String, Object> path = ServletUtil.administratorValidate(request, response);
 
-        // Exit if not valid
-        if (!valid) {
+        // Get administrator validation result
+        AdministratorValidationResult result = (AdministratorValidationResult)path.get("administratorValidateResult");
+
+        // Validation failed case
+        if (result != AdministratorValidationResult.IS_ADMINISTRATOR) {
+            ServletUtil.showPermissionRequiredMessage(request, response);
             return;
         }
 
@@ -36,9 +44,7 @@ public class ItemTypeManagementServlet extends AdministratorServlet {
 
         // Action null case
         if (action == null) {
-            request.setAttribute("message", "Vui lòng cung cấp đủ thông tin truy cập trước khi truy cập!");
-            request.setAttribute("color", "red");
-            request.getRequestDispatcher("message").forward(request, response);
+            ServletUtil.showInputRequiredMessage(request, response);
             return;
         }
 
@@ -48,12 +54,7 @@ public class ItemTypeManagementServlet extends AdministratorServlet {
             &&
             !action.equals("detail")
         ) {
-            request.setAttribute(
-                "message",
-                "Thông tin truy cập không hợp lệ! Vui lòng thử lại!"
-            );
-            request.setAttribute("color", "red");
-            request.getRequestDispatcher("message").forward(request, response);
+            ServletUtil.showInvalidInputMessage(request, response);
             return;
         }
 
@@ -64,12 +65,7 @@ public class ItemTypeManagementServlet extends AdministratorServlet {
 
             // ID null case
             if (id == null) {
-                request.setAttribute(
-                    "message",
-                    "Vui lòng cung cấp đủ thông tin truy cập trước khi truy cập!"
-                );
-                request.setAttribute("color", "red");
-                request.getRequestDispatcher("message").forward(request, response);
+                ServletUtil.showInputRequiredMessage(request, response);
                 return;
             }
 
@@ -87,11 +83,7 @@ public class ItemTypeManagementServlet extends AdministratorServlet {
 
             // Type not exist case
             if (type == null) {
-                request.setAttribute(
-                    "message",
-                    "Loại sản phẩm này không tồn tại! Vui lòng thử lại!"
-                );
-                super.doGet(request, response);
+                ServletUtil.showDataNotExistMessage(request, response);
                 return;
             }
 

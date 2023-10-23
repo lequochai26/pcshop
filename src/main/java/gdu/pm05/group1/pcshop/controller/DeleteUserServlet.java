@@ -1,8 +1,11 @@
 package gdu.pm05.group1.pcshop.controller;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.Set;
 
+import gdu.pm05.group1.pcshop.controller.util.ServletUtil;
+import gdu.pm05.group1.pcshop.controller.util.enums.AdministratorValidationResult;
 import gdu.pm05.group1.pcshop.model.Cart;
 import gdu.pm05.group1.pcshop.model.Order;
 import gdu.pm05.group1.pcshop.model.User;
@@ -13,11 +16,12 @@ import gdu.pm05.group1.pcshop.model.dbhandler.IDBHandler;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet (name = "deleteuser", urlPatterns = "/deleteuser")
-public class DeleteUserServlet extends AdministratorServlet {
+public class DeleteUserServlet extends HttpServlet {
     // CONSTRUCTORS:
     public DeleteUserServlet() {
         super();
@@ -28,10 +32,14 @@ public class DeleteUserServlet extends AdministratorServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Administrator validation
-        boolean valid = this.validateAdministrator(request, response);
+        Map<String, Object> path = ServletUtil.administratorValidate(request, response);
 
-        // Exit if not valud
-        if (!valid) {
+        // Get administrator validation result
+        AdministratorValidationResult result = (AdministratorValidationResult)path.get("administratorValidateResult");
+
+        // Administrator validation failed case
+        if (result != AdministratorValidationResult.IS_ADMINISTRATOR) {
+            ServletUtil.showPermissionRequiredMessage(request, response);
             return;
         }
 
@@ -40,12 +48,7 @@ public class DeleteUserServlet extends AdministratorServlet {
 
         // Username null case
         if (username == null) {
-            request.setAttribute(
-                "message",
-                "Không đủ thông tin truy cập! Vui lòng thử lại!"
-            );
-            request.setAttribute("color", "red");
-            request.getRequestDispatcher("message").forward(request, response);
+            ServletUtil.showInputRequiredMessage(request, response);
             return;
         }
 
@@ -63,12 +66,7 @@ public class DeleteUserServlet extends AdministratorServlet {
 
         // User not exist case
         if (user == null) {
-            request.setAttribute(
-                "message",
-                "Tài khoản người dùng không tồn tại!"
-            );
-            request.setAttribute("color", "red");
-            request.getRequestDispatcher("message").forward(request, response);
+            ServletUtil.showDataNotExistMessage(request, response);
             return;
         }
 
@@ -80,12 +78,10 @@ public class DeleteUserServlet extends AdministratorServlet {
 
         // Having orders case
         if (orders.size() > 0) {
-            request.setAttribute(
-                "message",
+            ServletUtil.showMessage(
+                request, response,
                 "Tài khoản người dùng này đang có đơn hàng! Không thể xóa!"
             );
-            request.setAttribute("color", "red");
-            request.getRequestDispatcher("message").forward(request, response);
             return;
         }
 

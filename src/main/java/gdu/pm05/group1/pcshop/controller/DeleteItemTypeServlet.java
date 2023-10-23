@@ -1,18 +1,22 @@
 package gdu.pm05.group1.pcshop.controller;
 
 import java.io.IOException;
+import java.util.Map;
 
+import gdu.pm05.group1.pcshop.controller.util.ServletUtil;
+import gdu.pm05.group1.pcshop.controller.util.enums.AdministratorValidationResult;
 import gdu.pm05.group1.pcshop.model.ItemType;
 import gdu.pm05.group1.pcshop.model.dbhandler.HQLParameter;
 import gdu.pm05.group1.pcshop.model.dbhandler.IDBHandler;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet (name = "deleteitemtype", urlPatterns = "/deleteitemtype")
-public class DeleteItemTypeServlet extends AdministratorServlet {
+public class DeleteItemTypeServlet extends HttpServlet {
     // CONSTRUCTORS:
     public DeleteItemTypeServlet() {
         super();
@@ -27,11 +31,15 @@ public class DeleteItemTypeServlet extends AdministratorServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Validation
-        boolean valid = this.validateAdministrator(request, response);
+        // Administrator validation
+        Map<String, Object> path = ServletUtil.administratorValidate(request, response);
 
-        // Exit if not valid
-        if (!valid) {
+        // Get administrator validation result
+        AdministratorValidationResult result = (AdministratorValidationResult)path.get("administratorValidateResult");
+
+        // Administrator validatiom failed
+        if (result != AdministratorValidationResult.IS_ADMINISTRATOR) {
+            ServletUtil.showPermissionRequiredMessage(request, response);
             return;
         }
 
@@ -52,14 +60,7 @@ public class DeleteItemTypeServlet extends AdministratorServlet {
 
         // Type not exist case
         if (type == null) {
-            request.setAttribute(
-                "message",
-                "Không tồn tại loại sản phẩm với mã '@id', vui lòng thử lại!".replace(
-                    "@id", id
-                )
-            );
-            request.setAttribute("color", "red");
-            request.getRequestDispatcher("message").forward(request, response);
+            ServletUtil.showDataNotExistMessage(request, response);
             return;
         }
 
@@ -69,6 +70,4 @@ public class DeleteItemTypeServlet extends AdministratorServlet {
         // Send redirect back to item types management page
         response.sendRedirect("itemtypesmanagement");
     }
-
-    
 }

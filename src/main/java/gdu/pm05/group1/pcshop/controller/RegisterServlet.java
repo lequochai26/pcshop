@@ -1,8 +1,11 @@
 package gdu.pm05.group1.pcshop.controller;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.Set;
 
+import gdu.pm05.group1.pcshop.controller.util.ServletUtil;
+import gdu.pm05.group1.pcshop.controller.util.enums.UserValidationResult;
 import gdu.pm05.group1.pcshop.model.Cart;
 import gdu.pm05.group1.pcshop.model.CartItem;
 import gdu.pm05.group1.pcshop.model.User;
@@ -29,22 +32,19 @@ public class RegisterServlet extends HttpServlet {
     // METHODS:
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Get session
-        HttpSession session = request.getSession(false);
+        // User validation
+        Map<String, Object> path = ServletUtil.userValidate(request, response);
 
-        // User logged in case
-        if (session != null) {
-            if (session.getAttribute("user") != null) {
-                RequestDispatcher messageDispatcher = request.getRequestDispatcher(
-                    "WEB-INF/jsp/message.jsp"
-                );
+        // Get user validation result
+        UserValidationResult result = (UserValidationResult)path.get("userValidateResult");
 
-                request.setAttribute("color", "black");
-                request.setAttribute("message", "Hiện tại, bạn đang đăng nhập rồi!");
-
-                messageDispatcher.forward(request, response);
-                return;
-            }
+        // User logged-in case
+        if (result == UserValidationResult.SUCCESSFULLY) {
+            ServletUtil.showMessage(
+                request, response,
+                "Hiện tại, bạn đang trong trạng thái đăng nhập!"
+            );
+            return;
         }
 
         // Get dispatcher
@@ -159,10 +159,9 @@ public class RegisterServlet extends HttpServlet {
         }
 
         // Set attributes for request
-        request.setAttribute("color", "green");
-        request.setAttribute(
-            "message",
-            "Đăng ký tài khoản thành công!"
+        ServletUtil.showMessage(
+            request, response,
+            "Đăng ký thành công"
         );
 
         // Get dispatcher

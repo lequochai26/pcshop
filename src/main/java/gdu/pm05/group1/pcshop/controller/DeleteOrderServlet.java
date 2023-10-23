@@ -3,6 +3,7 @@ package gdu.pm05.group1.pcshop.controller;
 import java.io.IOException;
 
 import gdu.pm05.group1.pcshop.controller.util.ServletUtil;
+import gdu.pm05.group1.pcshop.controller.util.enums.AdministratorValidationResult;
 import gdu.pm05.group1.pcshop.model.Order;
 import gdu.pm05.group1.pcshop.model.OrderItem;
 import gdu.pm05.group1.pcshop.model.dbhandler.HQLParameter;
@@ -11,13 +12,15 @@ import gdu.pm05.group1.pcshop.model.enums.OrderStatus;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import java.util.Map;
 import java.util.Set;
 
 @WebServlet (name = "deleteorder", urlPatterns = "/deleteorder")
-public class DeleteOrderServlet extends AdministratorServlet {
+public class DeleteOrderServlet extends HttpServlet {
     // CONSTRUCTORS:
     public DeleteOrderServlet() {
         super();
@@ -28,10 +31,14 @@ public class DeleteOrderServlet extends AdministratorServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Administrator validation
-        boolean valid = this.validateAdministrator(request, response);
+        Map<String, Object> path = ServletUtil.administratorValidate(request, response);
 
-        // Exit if not valid
-        if (!valid) {
+        // Get administrator validation result
+        AdministratorValidationResult result = (AdministratorValidationResult)path.get("administratorValidateResult");
+
+        // Administrator validation failed case
+        if (result != AdministratorValidationResult.IS_ADMINISTRATOR) {
+            ServletUtil.showPermissionRequiredMessage(request, response);
             return;
         }
 
@@ -40,12 +47,7 @@ public class DeleteOrderServlet extends AdministratorServlet {
 
         // ID null case
         if (idStr == null) {
-            request.setAttribute(
-                "message",
-                "Không đủ thông tin truy cập!"
-            );
-            request.setAttribute("color", "red");
-            request.getRequestDispatcher("message").forward(request, response);
+            ServletUtil.showInputRequiredMessage(request, response);
             return;
         }
 
@@ -55,12 +57,10 @@ public class DeleteOrderServlet extends AdministratorServlet {
             id = Integer.parseInt(idStr);
         }
         catch (Exception e) {
-            request.setAttribute(
-                "message",
+            ServletUtil.showMessage(
+                request, response,
                 e.toString()
             );
-            request.setAttribute("color", "red");
-            request.getRequestDispatcher("message").forward(request, response);
             return;
         }
 
@@ -78,12 +78,7 @@ public class DeleteOrderServlet extends AdministratorServlet {
 
         // Order null case
         if (order == null) {
-            request.setAttribute(
-                "message",
-                "Đơn hàng không tồn tại! Xin vui lòng thử lại!"
-            );
-            request.setAttribute("color", "red");
-            request.getRequestDispatcher("message").forward(request, response);
+            ServletUtil.showDataNotExistMessage(request, response);
             return;
         }
 
