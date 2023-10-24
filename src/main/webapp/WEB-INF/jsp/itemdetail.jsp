@@ -87,6 +87,11 @@
                                     </div>
                                 </div>
 
+                                <!-- Item type display area -->
+                                <div class="itemType">
+                                    Loại sản phẩm: ${item.type.name}
+                                </div>
+
                                 <!-- Item price display area -->
                                 <div class="itemPrice">
                                     <!-- Title -->

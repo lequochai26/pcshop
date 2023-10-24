@@ -64,6 +64,15 @@ public class DeleteItemTypeServlet extends HttpServlet {
             return;
         }
 
+        // Type that has at least one item belongs to
+        if (!type.getItems().isEmpty()) {
+            ServletUtil.showMessage(
+                request, response,
+                "Chỉ có thể xóa loại sản phẩm khi không có sản phẩm nào thuộc về loại sản phẩm này!"
+            );
+            return;
+        }
+
         // Delete type
         dbHandler.remove(type);
 

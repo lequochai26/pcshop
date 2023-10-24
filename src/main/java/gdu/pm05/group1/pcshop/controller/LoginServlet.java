@@ -1,7 +1,10 @@
 package gdu.pm05.group1.pcshop.controller;
 
 import java.io.IOException;
+import java.util.Map;
 
+import gdu.pm05.group1.pcshop.controller.util.ServletUtil;
+import gdu.pm05.group1.pcshop.controller.util.enums.UserValidationResult;
 import gdu.pm05.group1.pcshop.model.User;
 import gdu.pm05.group1.pcshop.model.dbhandler.HQLParameter;
 import gdu.pm05.group1.pcshop.model.dbhandler.IDBHandler;
@@ -24,24 +27,19 @@ public class LoginServlet extends HttpServlet {
     // METHODS:
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Get session
-        HttpSession session = request.getSession(false);
+        // User validation
+        Map<String, Object> path = ServletUtil.userValidate(request, response);
 
-        // User logged in case
-        if (session != null) {
-            if (session.getAttribute("user") != null) {
-                RequestDispatcher messageDispatcher = request.getRequestDispatcher(
-                    "WEB-INF/jsp/message.jsp"
-                );
+        // Get User validation result
+        UserValidationResult result = (UserValidationResult)path.get("userValidateResult");
 
-                request.setAttribute("color", "black");
-                request.setAttribute(
-                    "message", "Bạn đã đăng nhập!"
-                );
-
-                messageDispatcher.forward(request, response);
-                return;
-            }
+        // Logged in case
+        if (result == UserValidationResult.SUCCESSFULLY) {
+            ServletUtil.showMessage(
+                request, response,
+                "Bạn đã đăng nhập!"
+            );
+            return;
         }
 
         // Get dispatcher
