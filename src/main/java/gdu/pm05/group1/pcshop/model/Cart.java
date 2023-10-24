@@ -39,6 +39,15 @@ public class Cart {
 
 
     // METHODS:
+    public CartItem getItem(String itemId) {
+        for (CartItem item : items) {
+            if (!item.getItem().getId().equals(itemId)) {
+                continue;
+            }
+            return item;
+        }
+        return null;
+    }
     public String getUsername() {
         return username;
     }

@@ -55,6 +55,15 @@ public class Order {
     }
 
     // METHODS:
+    public OrderItem getItem(String itemId) {
+        for (OrderItem item : items) {
+            if (!item.getItem().getId().equals(itemId)) {
+                continue;
+            }
+            return item;
+        }
+        return null;
+    }
     public double totalPriceCalculate() {
         totalPrice = 0;
 

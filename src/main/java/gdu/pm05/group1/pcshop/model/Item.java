@@ -66,9 +66,13 @@ public class Item {
         this.orders = orders;
     }
 
-
-
     // METHODS:
+    public void addAmount(int amount) {
+        this.amount += amount;
+    }
+    public void removeAmount(int amount) {
+        this.amount -= amount;
+    }
     public String getId() {
         return id;
     }

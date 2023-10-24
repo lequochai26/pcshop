@@ -40,6 +40,9 @@ public class OrderItem implements Serializable {
     public double totalPriceCalculate() {
         return (amount * item.getPrice());
     }
+    public void addAmount(int amount) {
+        this.amount += amount;
+    }
     public Order getOrder() {
         return order;
     }

@@ -40,6 +40,9 @@ public class CartItem implements Serializable {
     public double totalPriceCalculate() {
         return (amount * item.getPrice());
     }
+    public void addAmount(int amount) {
+        this.amount += amount;
+    }
     public Cart getCart() {
         return cart;
     }

@@ -74,13 +74,7 @@ public class OrderRequestServlet extends HttpServlet {
             String id = ids.nextElement();
 
             // Get ordered item in cart
-            CartItem orderredCartItem = null;
-            for (CartItem cartItem : cart.getItems()) {
-                if (cartItem.getItem().getId().equals(id)) {
-                    orderredCartItem = cartItem;
-                    break;
-                }
-            }
+            CartItem orderredCartItem = cart.getItem(id);
 
             // Ordered item not found in cart case
             if (orderredCartItem == null) {
@@ -112,7 +106,7 @@ public class OrderRequestServlet extends HttpServlet {
             }
 
             // Reduce amount of item pending on amount of item in cart
-            item.setAmount(itemAmount - cartItemAmount);
+            item.removeAmount(cartItemAmount);
 
             // Save item to db
             dbHandler.save(item);

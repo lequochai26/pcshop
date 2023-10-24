@@ -99,9 +99,7 @@ public class CancelOrderServlet extends HttpServlet {
         // Recover item's amount in order
         for (OrderItem orderItem : order.getItems()) {
             Item item = orderItem.getItem();
-            item.setAmount(
-                item.getAmount() + orderItem.getAmount()
-            );
+            item.addAmount(orderItem.getAmount());
             dbHandler.save(item);
         }
 

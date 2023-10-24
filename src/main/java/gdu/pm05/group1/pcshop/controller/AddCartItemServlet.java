@@ -105,24 +105,25 @@ public class AddCartItemServlet extends HttpServlet {
         }
 
         // Get CartItem
-        CartItem cartItem = null;
-        for (CartItem cItem : cart.getItems()) {
-            if (cItem.getItem().getId().equals(item.getId())) {
-                cartItem = cItem;
-                break;
-            }
-        }
+        CartItem cartItem = cart.getItem(id);
 
         if (cartItem == null) {
             cartItem = new CartItem();
             cartItem.setItem(item);
             cartItem.setCart(cart);
         }
+        else {
+            if ((cartItem.getAmount() + amount) > item.getAmount()) {
+                ServletUtil.showMessage(
+                    request, response,
+                    "Số lượng thêm không hợp lệ, vui lòng thử lại!"
+                );
+                return;
+            }
+        }
 
         // Set cart item amount
-        cartItem.setAmount(
-            cartItem.getAmount() + amount
-        );
+        cartItem.addAmount(amount);
 
         // Save cart item if this cart is belong to an User
         if (user != null) {
